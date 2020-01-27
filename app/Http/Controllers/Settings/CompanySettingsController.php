@@ -14,7 +14,7 @@ class CompanySettingsController extends Controller
      */
     public function index()
     {
-        return view('admin.settings.company_setting');
+        return view('admin.settings.company.company_setting');
     }
 
     /**

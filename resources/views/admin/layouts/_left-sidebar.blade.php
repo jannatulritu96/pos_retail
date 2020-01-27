@@ -30,9 +30,9 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="eco-products-cart.html" class="sidebar-link">
+                        <a href="{{ route('customer.index') }}" class="sidebar-link">
                             <i class="mdi mdi-cart"></i>
-                            <span class="hide-menu">Products Cart</span>
+                            <span class="hide-menu">Customer</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

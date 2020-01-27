@@ -27,6 +27,8 @@
 <script src="{{ asset('assets/dist/js/pages/dashboards/dashboard1.js') }}"></script>
 <script src="{{ asset('assets/assets/libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('assets/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
+<script src="{{ asset('assets/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('assets/dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
 <script src="{{ asset('assets/dist/js/pages/calendar/cal-init.js') }}"></script>
 <script>
     $('#calendar').fullCalendar('option', 'height', 650);

@@ -41,17 +41,18 @@
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="company_logo">Logo</label>
-                                    <input id="company_logo" type="text" class="form-control @error('company_logo') is-invalid @enderror" name="company_logo" placeholder="Logo" value="{{ old('company_logo') }}" style="width: 98%;">
+                                    <input id="company_logo"class="form-control" type="file"  name="company_logo" style="width: 98%;">
                                     @error('company_logo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
+
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="currency_code">Currency code<span
                                             style="color: red">*</span></label>
-                                    <input id="currency_code" type="text" class="form-control @error('currency_code') is-invalid @enderror" name="oldpass" placeholder="Currency code" value="{{ old('currency_code') }}" required style="width: 98%;">
+                                    <input id="currency_code" type="number" class="form-control @error('currency_code') is-invalid @enderror" name="currency_code" placeholder="Currency code" value="{{ old('currency_code') }}" required style="width: 98%;">
                                     @error('currency_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,7 +61,7 @@
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="tax">Tax</label>
-                                    <input id="tax" type="text" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ old('tax') }}" style="width: 98%;">
+                                    <input id="tax" type="number" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ old('tax') }}" style="width: 98%;">
                                     @error('tax')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -69,7 +70,7 @@
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="vat">Vat</label>
-                                    <input id="vat" type="text" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ old('vat') }}" style="width: 98%;">
+                                    <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ old('vat') }}" style="width: 98%;">
                                     @error('vat')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,7 +80,7 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="date">Date format<span
                                             style="color: red">*</span></label>
-                                    <input id="date" type="text" class="form-control @error('date') is-invalid @enderror" name="date"  placeholder="Date format" value="{{ old('date') }}" required style="width: 98%;">
+                                    <input id="date" type="date" class="form-control @error('date') is-invalid @enderror" name="date"  placeholder="Date format" value="{{ old('date') }}" required style="width: 98%;">
                                     @error('date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
