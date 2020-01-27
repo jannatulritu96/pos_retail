@@ -26,5 +26,12 @@ Auth::routes([
 
 Route::get('dashboard','DashboardController@index')->name('dashboard');
 
+Route::group(['prefix' => 'settings'], function (){
 
-Route::resource('company-settings', 'CompanySettingsController');
+    Route::resource('company-settings', 'Settings\CompanySettingsController');
+    Route::resource('outlet', 'Settings\OutletController');
+    Route::resource('customer', 'Settings\CustomerController');
+    Route::resource('payment', 'Settings\PaymentController');
+    Route::resource('supplier', 'Settings\CompanySettingsController');
+    Route::resource('unit', 'Settings\UnitController');
+});

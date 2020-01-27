@@ -15,6 +15,18 @@ class CreateCompanySettingsTable extends Migration
     {
         Schema::create('company_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('company_name');
+            $table->string('company_email');
+            $table->string('company_phone');
+            $table->string('company_logo');
+            $table->string('currency_code');
+            $table->string('tax');
+            $table->string('vat');
+            $table->string('date');
+            $table->string('pagination');
+            $table->string('year');
+            $table->string('stock_out_method');
+            $table->string('customer');
             $table->timestamps();
         });
     }

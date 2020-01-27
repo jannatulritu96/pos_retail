@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c048f104-e3dd-4fc5-a25e-a01252991157" name="Default Changelist" comment="" />
+    <list default="true" id="c048f104-e3dd-4fc5-a25e-a01252991157" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CompanySettingsController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_27_093740_create_company_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_27_093740_create_company_settings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/company_setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/company_setting.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +151,7 @@
       <updated>1579199501738</updated>
       <workItem from="1579199537777" duration="6982000" />
       <workItem from="1580104288114" duration="125000" />
-      <workItem from="1580104415061" duration="13952000" />
+      <workItem from="1580104415061" duration="19682000" />
     </task>
     <servers />
   </component>
