@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Payment;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -14,7 +15,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::get();
+        return view('admin.settings.payment.index',compact('payments'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.settings.payment.create');
     }
 
     /**
@@ -35,7 +37,18 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'method_name'=>'required',
+        ]);
+        $payment = Payment::create([
+            'method_name' => $request->method_name,
+        ]);
+        if ($payment) {
+            session()->flash('success','Payment stored successfully');
+        } else {
+            session()->flash('success','Payment stored successfully');
+        }
+        return redirect()->route('payment.index');
     }
 
     /**
@@ -57,7 +70,8 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['payment'] = Payment::findOrFail($id);
+        return view('admin.settings.payment.edit',$data);
     }
 
     /**
@@ -69,7 +83,15 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $payment= Payment::where(['id'=> $id])->update([
+            'method_name' => $request->method_name,
+        ]);
+        if ($payment) {
+            session()->flash('success','Payment stored successfully');
+        } else {
+            session()->flash('success','Payment stored successfully');
+        }
+        return redirect()->route('payment.index');
     }
 
     /**
@@ -80,6 +102,36 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Payment::findOrFail($id)->delete();
+
+
+        if ($delete == 1) {
+            $success = true;
+            $message = "Payment deleted successfully";
+        } else {
+            $success = true;
+            $message = "Payment not found";
+        }
+
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+    public function changeActivity($id)
+    {
+        $payment = Payment::find($id);
+        $status = 0;
+        if ($payment->status == 0) {
+            $status = 1;
+        }
+        $payment = $payment->update(['status' => $status]);
+
+        if ($payment) {
+            return response()->json(['success' => true, 'Status updated Successfully', 'status' => 200], 200);
+        } else {
+            return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
+        }
     }
 }

@@ -48,9 +48,9 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="eco-products-orders.html" class="sidebar-link">
+                        <a href="{{ route('payment.index') }}" class="sidebar-link">
                             <i class="mdi mdi-chart-pie"></i>
-                            <span class="hide-menu">Product Orders</span>
+                            <span class="hide-menu">Payment</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
