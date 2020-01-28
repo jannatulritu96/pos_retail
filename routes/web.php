@@ -43,4 +43,5 @@ Route::group(['prefix' => 'settings'], function (){
     Route::post('/supplier/change-activity/{id}', 'Settings\SupplierController@changeActivity')->name('supplier.change-activity');
     //Outlet route
     Route::resource('unit', 'Settings\UnitController');
+    Route::post('/unit/change-activity/{id}', 'Settings\UnitController@changeActivity')->name('unit.change-activity');
 });

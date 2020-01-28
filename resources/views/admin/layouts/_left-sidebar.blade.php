@@ -32,31 +32,31 @@
                     <li class="sidebar-item">
                         <a href="{{ route('customer.index') }}" class="sidebar-link">
                             <i class="mdi mdi-cart"></i>
-                            <span class="hide-menu">Customer</span>
+                            <span class="hide-menu">Customers</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('supplier.index') }}" class="sidebar-link">
                             <i class="mdi mdi-cart-plus"></i>
-                            <span class="hide-menu">Supplier</span>
+                            <span class="hide-menu">Suppliers</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('outlet.index') }}" class="sidebar-link">
                             <i class="mdi mdi-camera-burst"></i>
-                            <span class="hide-menu">Outlet</span>
+                            <span class="hide-menu">Outlets</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('payment.index') }}" class="sidebar-link">
                             <i class="mdi mdi-chart-pie"></i>
-                            <span class="hide-menu">Payment</span>
+                            <span class="hide-menu">Payment Method</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="eco-products-checkout.html" class="sidebar-link">
+                        <a href="{{ route('unit.index') }}" class="sidebar-link">
                             <i class="mdi mdi-clipboard-check"></i>
-                            <span class="hide-menu">Products Checkout</span>
+                            <span class="hide-menu">Units</span>
                         </a>
                     </li>
                 </ul>
