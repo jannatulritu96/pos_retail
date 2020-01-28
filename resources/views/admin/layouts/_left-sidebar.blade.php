@@ -42,9 +42,9 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="eco-products-detail.html" class="sidebar-link">
+                        <a href="{{ route('outlet.index') }}" class="sidebar-link">
                             <i class="mdi mdi-camera-burst"></i>
-                            <span class="hide-menu">Product Details</span>
+                            <span class="hide-menu">Outlet</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

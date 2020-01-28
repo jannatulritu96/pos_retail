@@ -112,7 +112,7 @@
                 data: data,
                 success: function (results) {
 
-                    if (response.success) {
+                    if (results.success === true) {
                         window.location.reload()
                     }
                 }

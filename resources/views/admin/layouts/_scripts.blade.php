@@ -34,3 +34,5 @@
     $('#calendar').fullCalendar('option', 'height', 650);
 
 </script>
+<!--ck editor js -->
+<script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
