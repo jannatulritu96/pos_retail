@@ -38,33 +38,33 @@
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
     <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <div class="page-breadcrumb border-bottom">
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-xs-12 align-self-center">
-                    <h5 class="font-medium text-uppercase mb-0">Dashboard</h5>
-                </div>
-                <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
-                    <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">
-                        <ol class="breadcrumb mb-0 justify-content-end p-0">
-                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
-        <div class="page-content container-fluid">
+{{--        <!-- ============================================================== -->--}}
+{{--        <!-- Bread crumb and right sidebar toggle -->--}}
+{{--        <!-- ============================================================== -->--}}
+{{--        <div class="page-breadcrumb border-bottom">--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-3 col-md-4 col-xs-12 align-self-center">--}}
+{{--                    <h5 class="font-medium text-uppercase mb-0">Dashboard</h5>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">--}}
+{{--                    <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">--}}
+{{--                        <ol class="breadcrumb mb-0 justify-content-end p-0">--}}
+{{--                            <li class="breadcrumb-item"><a href="index-2.html">Home</a></li>--}}
+{{--                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>--}}
+{{--                        </ol>--}}
+{{--                    </nav>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <!-- ============================================================== -->--}}
+{{--        <!-- End Bread crumb and right sidebar toggle -->--}}
+{{--        <!-- ============================================================== -->--}}
+{{--        <!-- ============================================================== -->--}}
+{{--        <!-- Container fluid  -->--}}
+{{--        <!-- ============================================================== -->--}}
+{{--        <div class="page-content container-fluid">--}}
             @yield('content')
-        </div>
+{{--        </div>--}}
         <!-- ============================================================== -->
         <!-- End Container fluid  -->
         <!-- ============================================================== -->
@@ -72,7 +72,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer text-center">
-
+            All Rights Reserved by Ample admin. Designed and Developed by <a href="https://wrappixel.com/">WrapPixel</a>.
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
@@ -89,6 +89,6 @@
 <!-- customizer Panel -->
 <!-- ============================================================== -->
 <div class="chat-windows"></div>
-@yield('scripts')
+@yield('script')
 @include('admin.layouts._scripts')
 </html>

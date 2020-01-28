@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Customer list</li>
+                        <li class="breadcrumb-item active" aria-current="page">Supplier list</li>
                     </ol>
                 </nav>
             </div>
@@ -27,11 +27,11 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Customer list</h4>
+                                <h4 class="card-title">Supplier list</h4>
                             </div>
                             <div class="col-md-6">
-{{--                                <button type="submit" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create Customer</button>--}}
-                                <a href="{{ route('customer.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create Customer</a>
+{{--                                <button type="submit" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create supplier</button>--}}
+                                <a href="{{ route('supplier.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create supplier</a>
                             </div>
                         </div>
                     </div>
@@ -43,23 +43,25 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile No.</th>
+                                    <th>fax</th>
                                     <th>Address</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach($customers as $customer)
+                            @foreach($suppliers as $supplier)
                                 <tr>
-                                    <td>{{ $customer->id }}</td>
-                                    <td>{{ $customer->name }}</td>
-                                    <td>{{ $customer->email }}</td>
-                                    <td>{{ $customer->phone }}</td>
-                                    <td>{{ $customer->address }}</td>
+                                    <td>{{ $supplier->id }}</td>
+                                    <td>{{ $supplier->name }}</td>
+                                    <td>{{ $supplier->email }}</td>
+                                    <td>{{ $supplier->phone }}</td>
+                                    <td>{{ $supplier->fax }}</td>
+                                    <td>{{ $supplier->address }}</td>
                                     <td class="text-center">
-                                        @if($customer->status == 1)
+                                        @if($supplier->status == 1)
                                             <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
-                                        @else($customer->status == 0)
+                                        @else($supplier->status == 0)
                                             <span style="font-size: 16px;" class="badge badge-pill badge-danger">Inactive</span>
                                         @endif
                                     </td>
@@ -71,12 +73,12 @@
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
                                             <ul class="dropdown-menu pull-right" role="menu">
-                                                <li><a class="dropdown-item" href="{{ route('customer.edit',$customer->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                <li><a class="dropdown-item" href="{{ route('supplier.edit',$supplier->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
                                                 <li><a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a></li>
-                                                <li><a class="dropdown-item" href="" onclick="updateStatus({{ $customer->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
+                                                <li><a class="dropdown-item" href="" onclick="updateStatus({{ $supplier->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                 <li><div role="separator" class="dropdown-divider"></div></li>
                                                 <li>
-                                                    <button type="button"  onclick="deleteconfirm('{{ $customer->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</button>
+                                                    <button type="button"  onclick="deleteconfirm('{{ $supplier->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -105,7 +107,7 @@
             };
             $.ajax({
                 type: 'post',
-                url: 'customer/change-activity/' + id,
+                url: 'supplier/change-activity/' + id,
                 cache: false,
                 data: data,
                 success: function (results) {
@@ -129,7 +131,7 @@
                 if (e.value === true) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "customer/" + id,
+                        url: "supplier/" + id,
                         data: {_token: '{{  @csrf_token() }}' },
                         dataType: 'JSON',
                         success: function (results) {

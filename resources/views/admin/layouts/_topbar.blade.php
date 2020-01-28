@@ -85,8 +85,10 @@
                     <div class="d-flex no-block align-items-center p-3 mb-2 border-bottom">
 {{--                        <div class=""><img src="../../assets/images/users/1.jpg" alt="user" class="rounded" width="80"></div>--}}
                         <div class="ml-2">
-                            <h4 class="mb-0">{{ Auth::user()->name }}</h4>
-                            <p class=" mb-0 text-muted">{{ Auth::user()->email }}</p>
+{{--                            <h4 class="mb-0">{{ Auth::user()->name }}</h4>--}}
+                            <h4 class="mb-0">Abc</h4>
+                            <p class=" mb-0 text-muted">abc@gmail.com</p>
+{{--                            <p class=" mb-0 text-muted">{{ Auth::user()->email }}</p>--}}
                             <a href="javascript:void(0)" class="btn btn-sm btn-danger text-white mt-2 btn-rounded">View Profile</a>
                         </div>
                     </div>

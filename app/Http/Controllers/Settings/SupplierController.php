@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Supplier;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -14,7 +15,8 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        $suppliers= Supplier::get();
+        return view('admin.settings.supplier.index',compact('suppliers'));
     }
 
     /**
@@ -24,7 +26,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.settings.supplier.create');
     }
 
     /**
@@ -35,7 +37,26 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'fax'=>'required',
+            'address'=>'required',
+        ]);
+        $supplier = Supplier::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'fax' => $request->fax,
+            'address' => $request->address,
+        ]);
+        if ($supplier) {
+            session()->flash('success','Supplier stored successfully');
+        } else {
+            session()->flash('success','Supplier stored successfully');
+        }
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -57,7 +78,8 @@ class SupplierController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['supplier'] = Supplier::findOrFail($id);
+        return view('admin.settings.supplier.edit',$data);
     }
 
     /**
@@ -69,7 +91,19 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supplier= Supplier::where(['id'=> $id])->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'fax' => $request->phone,
+            'address' => $request->address,
+        ]);
+        if ($supplier) {
+            session()->flash('success','Supplier stored successfully');
+        } else {
+            session()->flash('success','Supplier stored successfully');
+        }
+        return redirect()->route('supplier.index');
     }
 
     /**
@@ -80,6 +114,36 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Supplier::findOrFail($id)->delete();
+
+
+        if ($delete == 1) {
+            $success = true;
+            $message = "Supplier deleted successfully";
+        } else {
+            $success = true;
+            $message = "Supplier not found";
+        }
+
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+    public function changeActivity($id)
+    {
+        $supplier = Supplier::find($id);
+        $status = 0;
+        if ($supplier->status == 0) {
+            $status = 1;
+        }
+        $supplier = $supplier->update(['status' => $status]);
+
+        if ($supplier) {
+            return response()->json(['success' => true, 'Status updated Successfully', 'status' => 200], 200);
+        } else {
+            return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
+        }
     }
 }

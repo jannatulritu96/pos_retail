@@ -36,9 +36,9 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="eco-products-edit.html" class="sidebar-link">
+                        <a href="{{ route('supplier.index') }}" class="sidebar-link">
                             <i class="mdi mdi-cart-plus"></i>
-                            <span class="hide-menu">Products Edit</span>
+                            <span class="hide-menu">Supplier</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

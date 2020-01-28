@@ -2,6 +2,22 @@
 
 @section('content')
 
+    <div class="page-breadcrumb border-bottom">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-xs-12 align-self-center">
+                <h5 class="font-medium text-uppercase mb-0">Dashboard</h5>
+            </div>
+            <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
+                <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">
+                    <ol class="breadcrumb mb-0 justify-content-end p-0">
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Customer list</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
     <div class="page-content container-fluid">
         <div class="row justify-content-center">
             <div class="col-6">
@@ -68,6 +84,10 @@
                                     </span>
                                     @enderror
                                 </div>
+                                <input id="tax" type="number" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ old('tax') }}" style="width: 98%;">
+                                <div class="input-group-append">
+                                    <span class="input-group-text">.00</span>
+                                </div>
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="vat">Vat</label>
                                     <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ old('vat') }}" style="width: 98%;">
@@ -124,8 +144,9 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="box-footer pull-right">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <button type="reset" class="btn btn-warning btn-flat">Clear</button>
                                 </div>
                             </div>
                         </form>

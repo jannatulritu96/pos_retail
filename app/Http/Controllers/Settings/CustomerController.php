@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('admin.settings.customer.index');
+        $customers= Customer::get();
+        return view('admin.settings.customer.index',compact('customers'));
     }
 
     /**
@@ -24,7 +26,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('admin.settings.customer.create');
     }
 
     /**
@@ -35,7 +38,25 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required',
+            'phone'=>'required',
+            'address'=>'required',
+        ]);
+        $customer = Customer::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+        if ($customer) {
+            session()->flash('success','Customer stored successfully');
+        } else {
+            session()->flash('success','Customer stored successfully');
+        }
+        return redirect()->route('customer.index');
+
     }
 
     /**
@@ -57,7 +78,9 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['customer'] = Customer::findOrFail($id);
+        return view('admin.settings.customer.edit',$data);
+
     }
 
     /**
@@ -69,7 +92,19 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $customer= Customer::where(['id'=> $id])->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+        ]);
+        if ($customer) {
+            session()->flash('success','Group stored successfully');
+        } else {
+            session()->flash('success','Group stored successfully');
+        }
+        return redirect()->route('customer.index');
+
     }
 
     /**
@@ -80,6 +115,37 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = Customer::findOrFail($id)->delete();
+
+
+        if ($delete == 1) {
+            $success = true;
+            $message = "Customer deleted successfully";
+        } else {
+            $success = true;
+            $message = "Customer not found";
+        }
+
+        //  Return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
     }
+    public function changeActivity($id)
+    {
+        $customer = Customer::find($id);
+        $status = 0;
+        if ($customer->status == 0) {
+            $status = 1;
+        }
+        $customer = $customer->update(['status' => $status]);
+
+        if ($customer) {
+            return response()->json(['success' => true, 'Status updated Successfully', 'status' => 200], 200);
+        } else {
+            return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
+        }
+    }
+
 }

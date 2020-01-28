@@ -31,7 +31,9 @@ Route::group(['prefix' => 'settings'], function (){
     Route::resource('company-settings', 'Settings\CompanySettingsController');
     Route::resource('outlet', 'Settings\OutletController');
     Route::resource('customer', 'Settings\CustomerController');
+    Route::post('/customer/change-activity/{id}', 'Settings\CustomerController@changeActivity')->name('customer.change-activity');
     Route::resource('payment', 'Settings\PaymentController');
-    Route::resource('supplier', 'Settings\CompanySettingsController');
+    Route::resource('supplier', 'Settings\SupplierController');
+    Route::post('/supplier/change-activity/{id}', 'Settings\SupplierController@changeActivity')->name('customer.change-activity');
     Route::resource('unit', 'Settings\UnitController');
 });
