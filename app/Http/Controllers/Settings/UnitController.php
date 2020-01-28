@@ -48,7 +48,7 @@ class UnitController extends Controller
         } else {
             session()->flash('success','Unit stored successfully');
         }
-        return redirect()->route('payment.index');
+        return redirect()->route('unit.index');
     }
 
     /**
@@ -127,9 +127,9 @@ class UnitController extends Controller
         if ($unit->status == 0) {
             $status = 1;
         }
-        $payment = $unit->update(['status' => $status]);
+        $unit = $unit->update(['status' => $status]);
 
-        if ($payment) {
+        if ($unit) {
             return response()->json(['success' => true, 'Status updated Successfully', 'status' => 200], 200);
         } else {
             return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);

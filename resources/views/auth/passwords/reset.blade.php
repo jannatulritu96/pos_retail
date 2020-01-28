@@ -63,7 +63,7 @@
                                     </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-link">
                             {{ __('Reset Password') }}
                         </button>
                     </form>

@@ -84,10 +84,7 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <input id="tax" type="number" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ old('tax') }}" style="width: 98%;">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">.00</span>
-                                </div>
+
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="vat">Vat</label>
                                     <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ old('vat') }}" style="width: 98%;">

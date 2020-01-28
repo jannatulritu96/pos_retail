@@ -40,7 +40,7 @@
                             <thead>
                                 <tr>
                                     <th>Sl</th>
-                                    <th>Name</th>
+                                    <th>Unit</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-right">Action</th>
                                 </tr>
