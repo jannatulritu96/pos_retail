@@ -16,7 +16,26 @@
                     <span>Dashboard</span>
                 </a>
             </li>
-
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                    <i class="fa fa-cog"></i>
+                    <span class="hide-menu">Products</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="{{ route('category.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Category</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('product.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Product</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="sidebar-item">
                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                     <i class="fa fa-cog"></i>
@@ -24,7 +43,7 @@
                 </a>
                 <ul aria-expanded="false" class="collapse first-level">
                     <li class="sidebar-item">
-                        <a href="{{ route('company-settings.index') }}" class="sidebar-link">
+                        <a href="{{ route('setting') }}" class="sidebar-link">
                             <i class="mdi mdi-cards-variant"></i>
                             <span class="hide-menu">Company setting</span>
                         </a>

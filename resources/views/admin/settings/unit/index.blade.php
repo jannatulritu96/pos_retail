@@ -66,11 +66,10 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right" role="menu">
                                                 <li><a class="dropdown-item" href="{{ route('unit.edit',$unit->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a></li>
                                                 <li><a class="dropdown-item" href="" onclick="updateStatus({{ $unit->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                 <li><div role="separator" class="dropdown-divider"></div></li>
                                                 <li>
-                                                    <button type="button"  onclick="deleteconfirm('{{ $unit->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</button>
+                                                    <a type="button"  onclick="deleteconfirm('{{ $unit->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
                                                 </li>
                                             </ul>
                                         </div>

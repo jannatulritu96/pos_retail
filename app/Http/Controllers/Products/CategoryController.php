@@ -133,6 +133,5 @@ class CategoryController extends Controller
         } else {
             return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
         }
-
     }
 }

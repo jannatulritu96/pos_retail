@@ -36,3 +36,7 @@
 </script>
 <!--ck editor js -->
 <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<!-- select2 JS -->
+<script src="{{ asset('assets/assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('assets/assets/libs/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ asset('assets/dist/js/pages/forms/select2/select2.init.js') }}"></script>

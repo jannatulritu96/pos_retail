@@ -27,6 +27,8 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<!-- This Page CSS -->
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/assets/libs/select2/dist/css/select2.min.css') }}">
 <!-- Sweet alert -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
