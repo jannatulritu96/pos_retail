@@ -57,3 +57,12 @@ Route::group(['prefix' => 'products'], function (){
     Route::resource('product', 'Products\ProductController');
     Route::post('/product/change-activity/{id}', 'Products\ProductController@changeActivity')->name('product.change-activity');
 });
+Route::group(['prefix' => 'expenses'], function (){
+    //expense_category route
+    Route::resource('expense_category', 'Expense\ExpenseCategoryController');
+    Route::post('/expense_category/change-activity/{id}', 'Expense\ExpenseCategoryController@changeActivity')->name('expense-category.change-activity');
+    //unit route
+    Route::resource('expense', 'Expense\ExpenseController');
+    Route::post('/expense/change-activity/{id}', 'Expense\ExpenseController@changeActivity')->name('expense.change-activity');
+    Route::get('/expense/search-report', 'Expense\ExpenseController@searchReport')->name('expense.search-report');
+});

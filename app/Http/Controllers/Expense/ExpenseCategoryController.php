@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Expense;
 
-use App\Category;
+use App\ExpenseCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class ExpenseCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
-        return view('admin.products.category.index',compact('categories'));
+        $categories = ExpenseCategory::get();
+        return view('admin.expense.expense_category.index',compact('categories'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.products.category.create');
+        return view('admin.expense.expense_category.create');
     }
 
     /**
@@ -38,17 +38,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category'=>'required',
+            'cat_name'=>'required',
         ]);
-        $category = Category::create([
-            'category' => $request->category,
+        $category = ExpenseCategory::create([
+            'cat_name' => $request->cat_name,
         ]);
         if ($category) {
-            session()->flash('success','Category stored successfully');
+            session()->flash('success','Expense Category stored successfully');
         } else {
-            session()->flash('success','Category stored successfully');
+            session()->flash('success','Expense Category stored successfully');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('expense_category.store');
     }
 
     /**
@@ -70,8 +70,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('admin.products.category.edit',compact('category'));
+        $data['category'] = ExpenseCategory::findOrFail($id);
+        return view('admin.expense.expense_category.edit',$data);
     }
 
     /**
@@ -83,15 +83,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::where(['id'=> $id])->update([
-            'category' => $request->category,
+        $category = ExpenseCategory::where(['id'=> $id])->update([
+            'cat_name' => $request->cat_name,
         ]);
         if ($category) {
-            session()->flash('success','Category stored successfully');
+            session()->flash('success','Expense Category stored successfully');
         } else {
-            session()->flash('success','Category stored successfully');
+            session()->flash('success','Expense Category stored successfully');
         }
-        return redirect()->route('category.index');
+        return redirect()->route('expense_category.index');
     }
 
     /**
@@ -102,15 +102,15 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $delete = Category::findOrFail($id)->delete();
+        $delete = ExpenseCategory::findOrFail($id)->delete();
 
 
         if ($delete == 1) {
             $success = true;
-            $message = "Unit deleted successfully";
+            $message = "Category deleted successfully";
         } else {
             $success = true;
-            $message = "Unit not found";
+            $message = "Category not found";
         }
 
         //  Return response
@@ -119,10 +119,9 @@ class CategoryController extends Controller
             'message' => $message,
         ]);
     }
-
     public function changeActivity($id)
     {
-        $category = Category::find($id);
+        $category = ExpenseCategory::find($id);
         $status = 0;
         if ($category->status == 0) {
             $status = 1;

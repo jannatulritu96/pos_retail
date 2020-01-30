@@ -18,7 +18,33 @@
             </li>
             <li class="sidebar-item">
                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                    <i class="fa fa-cog"></i>
+                    <i class="fa fa-dollar-sign"></i>
+                    <span class="hide-menu">Expense</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="{{ route('expense.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Expense</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('expense_category.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Expense Category</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('expense.search-report') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Expense Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                    <i class="fas fa-gift"></i>
                     <span class="hide-menu">Products</span>
                 </a>
                 <ul aria-expanded="false" class="collapse first-level">
