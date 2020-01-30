@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('product.index') }}">product list</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">product create</li>
+                        <li class="breadcrumb-item active" aria-current="page">Product edit</li>
                     </ol>
                 </nav>
             </div>
@@ -24,7 +24,7 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Product create form</h4>
+                        <h4 class="card-title">Product edit form</h4>
                         <form method="post" class="form-horizontal" action="{{ route('product.update',$product) }}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

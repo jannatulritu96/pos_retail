@@ -119,6 +119,7 @@ class CategoryController extends Controller
             'message' => $message,
         ]);
     }
+
     public function changeActivity($id)
     {
         $category = Category::find($id);

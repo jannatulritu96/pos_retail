@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('product.index') }}">product list</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">product create</li>
+                        <li class="breadcrumb-item active" aria-current="page">Product create</li>
                     </ol>
                 </nav>
             </div>

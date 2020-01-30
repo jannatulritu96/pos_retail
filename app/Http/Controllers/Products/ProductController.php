@@ -51,16 +51,36 @@ class ProductController extends Controller
             'sell'=>'required',
             'details'=>'required',
         ]);
-        $product = Product::create([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-            'code' => $request->code,
-            'unit' => $request->unit,
-            'purchase' => $request->purchase,
-            'sell' => $request->sell,
-            'details' => $request->details,
-            'image' => $request->image,
-        ]);
+
+            $product = new Product();
+            $product->category_id= $request->category_id;
+            $product->name= $request->name;
+            $product->code= $request->code;
+            $product->unit= $request->unit;
+            $product->purchase= $request->purchase;
+            $product->sell= $request->sell;
+            $product->details= $request->details;
+            if($request->hasFile('image'))
+            {
+                $photo= $request->file('image');
+                $photo->move('assets/product/',$photo->getClientOriginalName());
+                $product->image = 'assets/product/'.$photo->getClientOriginalName();
+            }
+            $product->save();
+
+//        $product = Product::create([
+//            'category_id' => $request->category_id,
+//            'name' => $request->name,
+//            'code' => $request->code,
+//            'unit' => $request->unit,
+//            'purchase' => $request->purchase,
+//            'sell' => $request->sell,
+//            'details' => $request->details,
+////            'image' => $request->image,
+//
+//        ]);
+
+
         if ($product) {
             session()->flash('success','Product stored successfully');
         } else {
@@ -104,16 +124,32 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::where(['id'=> $id])->update([
-            'category_id' => $request->category_id,
-            'name' => $request->name,
-            'code' => $request->code,
-            'unit' => $request->unit,
-            'purchase' => $request->purchase,
-            'sell' => $request->sell,
-            'details' => $request->details,
-            'image' => $request->image,
-        ]);
+        $product = Product::findOrFail($id);
+        $product->category_id= $request->category_id;
+        $product->name= $request->name;
+        $product->code= $request->code;
+        $product->unit= $request->unit;
+        $product->purchase= $request->purchase;
+        $product->sell= $request->sell;
+        $product->details= $request->details;
+        if($request->hasFile('image'))
+        {
+            $photo= $request->file('image');
+            $photo->move('assets/product/',$photo->getClientOriginalName());
+            $product->image = 'assets/product/'.$photo->getClientOriginalName();
+        }
+        $product->save();
+//        $product = Product::where(['id'=> $id])->update([
+//            'category_id' => $request->category_id,
+//            'name' => $request->name,
+//            'code' => $request->code,
+//            'unit' => $request->unit,
+//            'purchase' => $request->purchase,
+//            'sell' => $request->sell,
+//            'details' => $request->details,
+////            'image' => $request->image,
+//        ]);
+
         if ($product) {
             session()->flash('success','Product stored successfully');
         } else {

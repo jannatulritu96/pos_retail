@@ -90,12 +90,10 @@ class CompanySettingsController extends Controller
 
     public function Setting()
     {
-        $customer = Customer::where('status','Active')->get();
+        $customer = Customer::where('status','1')->get();
         $setting = CompanySetting::first();
         return view('admin.settings.company.company_setting',compact('customer','setting'));
 
-//        $data['settings']=Setting::first();
-//        return view('Settings',$data );
     }
     public function UpdateWebsite(Request $request)
     {
@@ -104,7 +102,6 @@ class CompanySettingsController extends Controller
             'company_name'=>'required',
             'company_email'=>'required',
             'company_phone'=>'required',
-            'company_logo'=>'required',
             'currency_code'=>'required',
             'tax'=>'required',
             'vat'=>'required',
@@ -113,33 +110,34 @@ class CompanySettingsController extends Controller
             'year'=>'required',
             'stock_out_method'=>'required',
             'customer'=>'required',
+//            'company_logo'=>'mimes:png,jpg,jpeg'
         ]);
 
-        $setting= CompanySetting::create([
-        'company_name' => $request->company_name,
-        'company_email' =>$request->company_email,
-        'company_phone' =>$request->company_phone,
-        'currency_code' =>$request->currency_code,
-        'tax' =>$request->tax,
-        'vat' =>$request->vat,
-        'date' =>$request->date,
-        'pagination' =>$request->pagination,
-        'year' =>$request->year,
-        'stock_out_method' =>$request->stock_out_method,
-        'customer' =>$request->customer,
-        'company_logo' =>$request->company_logo,
-        ]);
-//        if($request->hasFile('company_logo'))
-//        {
-//            $setting= CompanySetting::first();
+//        $setting= CompanySetting::CreateOrUpdate();
+        $setting = new CompanySetting();
+        $setting->company_name= $request->company_name;
+        $setting->company_email= $request->company_email;
+        $setting->company_phone= $request->company_phone;
+        $setting->currency_code= $request->currency_code;
+        $setting->tax= $request->tax;
+        $setting->vat= $request->vat;
+        $setting->date= $request->date;
+        $setting->pagination= $request->pagination;
+        $setting->year= $request->year;
+        $setting->stock_out_method= $request->stock_out_method;
+        $setting->customer= $request->customer;
+
+        if($request->hasFile('company_logo'))
+        {
+            $setting= CompanySetting::first();
 //            $old_file=$setting->company_logo;
-//            $image= $request->file('company_logo');
-//            $image->move('assets',$image->getClientOriginalName());
-//
-//            $setting->company_logo= 'assets/'.$image->getClientOriginalName();
-//            unlink($old_file);
-//        }
+            $image= $request->file('company_logo');
+            $image->move('assets',$image->getClientOriginalName());
 
+            $setting->company_logo= 'assets/'.$image->getClientOriginalName();
+//            unlink($old_file);
+        }
+        $setting->save();
         if ($setting) {
             session()->flash('success','Information stored successfully');
         } else {

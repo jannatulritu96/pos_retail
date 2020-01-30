@@ -116,9 +116,10 @@
                                             style="color: red">*</span></label>
                                     <select class="select2 form-control" name="pagination" style="width: 98%; height:36px;">
                                         <option value="">Pagination</option>
-                                        <option>10</option>
-                                        <option>25</option>
-                                        <option>50</option>
+                                        <option value="1">10</option>
+                                        <option value="2">25</option>
+                                        <option value="3">50</option>
+                                        <option value="3">100</option>
                                     </select>
                                     @error('pagination')
                                     <span class="invalid-feedback" role="alert">
@@ -129,17 +130,17 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="year">Year</label>
                                     <select class="select2 form-control" name="year" style="width: 98%; height:36px;">
-                                        <option value="">Year</option>
-                                        <option>2019</option>
-                                        <option>2020</option>
-                                        <option>2021</option>
-                                        <option>2022</option>
-                                        <option>2023</option>
-                                        <option>2024</option>
-                                        <option>2025</option>
-                                        <option>2026</option>
-                                        <option>2027</option>
-                                        <option>2028</option>
+                                        <option value="1">Year</option>
+                                        <option value="2">2019</option>
+                                        <option value="3">2020</option>
+                                        <option value="4">2021</option>
+                                        <option value="5">2022</option>
+                                        <option value="6">2023</option>
+                                        <option value="7">2024</option>
+                                        <option value="8">2025</option>
+                                        <option value="9">2026</option>
+                                        <option value="10">2027</option>
+                                        <option value="11">2028</option>
                                     </select>
                                     @error('year')
                                     <span class="invalid-feedback" role="alert">
@@ -151,9 +152,8 @@
                                     <label for="stock_out_method">Stock out method</label>
                                     <select class="select2 form-control"  name="year" style="width: 98%; height:36px;">
                                         <option value="">Select</option>
-                                        <option>10</option>
-                                        <option>25</option>
-                                        <option>50</option>
+                                        <option value="1">First In First Out</option>
+                                        <option value="2">Last In First Out</option>
                                     </select>
                                     @error('stock_out_method')
                                     <span class="invalid-feedback" role="alert">

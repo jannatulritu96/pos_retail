@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">product list</h4>
+                                <h4 class="card-title">Product list</h4>
                             </div>
                             <div class="col-md-6">
 {{--                                <button type="submit" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create product</button>--}}
@@ -56,14 +56,14 @@
                             @foreach($products as $product)
                                 <tr>
                                     <td>{{ $product->id }}</td>
-                                    <td>{{ $product->image }}</td>
+                                    <td> <img style="width: 60px;" src="{{ asset($product->image) }}"> </td>
                                     <td>{{ $product->barcode }}</td>
                                     <td>{{ $product->relCategory->category }}</td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->code }}</td>
                                     <td>{{ $product->unit }}</td>
-                                    <td>{{ $product->purchase }}</td>
-                                    <td>{{ $product->sell }}</td>
+                                    <td class="text-right">{{ $product->purchase }}/-</td>
+                                    <td class="text-right">{{ $product->sell }}/-</td>
                                     <td class="text-center">
                                         @if($product->status == 1)
                                             <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
