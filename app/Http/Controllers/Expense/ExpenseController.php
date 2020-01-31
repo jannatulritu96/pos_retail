@@ -183,7 +183,7 @@ class ExpenseController extends Controller
         }
     }
     public function searchReport(){
-
-        return view('admin.expense.expense_report');
+        $expenses = Expense::with(['relOutlet','relExpenseCategory'])->get();
+        return view('admin.expense.expense_report',compact('expenses'));
     }
 }

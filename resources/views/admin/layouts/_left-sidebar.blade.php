@@ -16,9 +16,25 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+
             <li class="sidebar-item">
                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
-                    <i class="fa fa-dollar-sign"></i>
+                    <i class="fa fa-cubes"></i>
+                    <span class="hide-menu">Inventory</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="{{ route('purchase.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Purchase</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
+                    <i class="fa fa-book"></i>
                     <span class="hide-menu">Expense</span>
                 </a>
                 <ul aria-expanded="false" class="collapse first-level">

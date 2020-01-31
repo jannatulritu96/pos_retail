@@ -13,10 +13,27 @@ class UnitController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $units = Unit::get();
-        return view('admin.settings.unit.index',compact('units'));
+        $sql = Unit::select('*');
+        $render = [];
+        if (isset($request->unit)) {
+            $sql->where('unit', 'like', '%'.$request->unit.'%');
+            $render['unit'] = $request->unit;
+        }
+        if (isset($request->status)) {
+            $sql->where('status', $request->status);
+            $render['status'] = $request->status;
+        }
+
+        $data = $sql->paginate(2);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+
+
+
+        return view('admin.settings.unit.index',compact('data','status'));
     }
 
     /**

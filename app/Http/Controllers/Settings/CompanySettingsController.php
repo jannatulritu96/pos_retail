@@ -9,95 +9,15 @@ use Illuminate\Http\Request;
 
 class CompanySettingsController extends Controller
 {
-//    /**
-//     * Display a listing of the resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function index()
-//    {
-//        return view('admin.settings.company.company_setting');
-//    }
-//
-//    /**
-//     * Show the form for creating a new resource.
-//     *
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function create()
-//    {
-//
-//    }
-//
-//    /**
-//     * Store a newly created resource in storage.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function store(Request $request)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Display the specified resource.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function show($id)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Show the form for editing the specified resource.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function edit($id)
-//    {
-//
-//        $customer = Customer::where('status','Active')->get();
-//        $setting = CompanySetting::findOrFail($id);
-//        return view('admin.settings.company.company_setting',compact('customer','setting'));
-//    }
-//
-//    /**
-//     * Update the specified resource in storage.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function update(Request $request, $id)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Remove the specified resource from storage.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function destroy($id)
-//    {
-//        //
-//    }
-
     public function Setting()
     {
         $customer = Customer::where('status','1')->get();
-        $setting = CompanySetting::first();
+        $setting = CompanySetting::find(1);
         return view('admin.settings.company.company_setting',compact('customer','setting'));
-
     }
+
     public function UpdateWebsite(Request $request)
     {
-//        dd($request->all());
         $request->validate([
             'company_name'=>'required',
             'company_email'=>'required',
@@ -113,32 +33,31 @@ class CompanySettingsController extends Controller
 //            'company_logo'=>'mimes:png,jpg,jpeg'
         ]);
 
-//        $setting= CompanySetting::CreateOrUpdate();
-        $setting = new CompanySetting();
-        $setting->company_name= $request->company_name;
-        $setting->company_email= $request->company_email;
-        $setting->company_phone= $request->company_phone;
-        $setting->currency_code= $request->currency_code;
-        $setting->tax= $request->tax;
-        $setting->vat= $request->vat;
-        $setting->date= $request->date;
-        $setting->pagination= $request->pagination;
-        $setting->year= $request->year;
-        $setting->stock_out_method= $request->stock_out_method;
-        $setting->customer= $request->customer;
+        $data = [
+            'company_name' => $request->company_name,
+            'company_email' => $request->company_email,
+            'company_phone' => $request->company_phone,
+            'currency_code' => $request->currency_code,
+            'tax' => $request->tax,
+            'vat' => $request->vat,
+            'date' => $request->date,
+            'pagination' => $request->pagination,
+            'year' => $request->year,
+            'stock_out_method' => $request->stock_out_method,
+            'customer' => $request->customer,
+        ];
 
-        if($request->hasFile('company_logo'))
-        {
-            $setting= CompanySetting::first();
-//            $old_file=$setting->company_logo;
-            $image= $request->file('company_logo');
-            $image->move('assets',$image->getClientOriginalName());
-
-            $setting->company_logo= 'assets/'.$image->getClientOriginalName();
+        if ($request->hasFile('company_logo')) {
+            $setting = CompanySetting::first();
+//            $old_file = $setting->company_logo;
+            $photo= $request->file('company_logo');
+            $photo->move('assets/company_logo/',$photo->getClientOriginalName());
+            $data['company_logo'] = 'assets/company_logo/'.$photo->getClientOriginalName();
 //            unlink($old_file);
         }
-        $setting->save();
-        if ($setting) {
+
+        $company = CompanySetting::updateOrCreate(['id' => 1], $data);
+        if ($company) {
             session()->flash('success','Information stored successfully');
         } else {
             session()->flash('success','Information stored successfully');

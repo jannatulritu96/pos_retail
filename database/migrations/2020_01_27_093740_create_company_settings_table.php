@@ -14,11 +14,11 @@ class CreateCompanySettingsTable extends Migration
     public function up()
     {
         Schema::create('company_settings', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->tinyInteger('id')->default(1);
             $table->string('company_name');
             $table->string('company_email');
             $table->string('company_phone');
-            $table->string('company_logo');
+            $table->string('company_logo')->nullable();
             $table->string('currency_code');
             $table->string('tax');
             $table->string('vat');

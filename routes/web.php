@@ -27,7 +27,6 @@ Auth::routes([
 Route::get('dashboard','DashboardController@index')->name('dashboard');
 
 Route::group(['prefix' => 'settings'], function (){
-
 //    Route::resource('company-settings', 'Settings\CompanySettingsController');
     //setting routes
     Route::get('/website-setting','Settings\CompanySettingsController@Setting')->name('setting');
@@ -64,5 +63,10 @@ Route::group(['prefix' => 'expenses'], function (){
     //unit route
     Route::resource('expense', 'Expense\ExpenseController');
     Route::post('/expense/change-activity/{id}', 'Expense\ExpenseController@changeActivity')->name('expense.change-activity');
-    Route::get('/expense/search-report', 'Expense\ExpenseController@searchReport')->name('expense.search-report');
+    Route::get('/search-report', 'Expense\ExpenseController@searchReport')->name('expense.search-report');
+});
+Route::group(['prefix' => 'Inventory '], function (){
+    //Purchase  route
+    Route::resource('purchase', 'Inventory\PurchaseController');
+    Route::post('/purchase/change-activity/{id}', 'Inventory\PurchaseController@changeActivity')->name('purchase.change-activity');
 });

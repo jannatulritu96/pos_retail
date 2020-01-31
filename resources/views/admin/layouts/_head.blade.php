@@ -6,7 +6,7 @@
 <meta name="author" content="">
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/assets/images/favicon.png') }}">
-<title>Ample admin Template - The Ultimate Multipurpose admin template</title>
+<title>Pos retail</title>
 <!-- chartist CSS -->
 <link href="{{ asset('assets/assets/libs/chartist/dist/chartist.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
@@ -19,7 +19,7 @@
 <!-- needed css -->
 <link href="{{ asset('assets/dist/css/style.min.css') }}" rel="stylesheet">
 
-<link href="{{ asset('assets/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('assets/assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">--}}
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
