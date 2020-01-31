@@ -13,10 +13,25 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $payments = Payment::get();
-        return view('admin.settings.payment.index',compact('payments'));
+        $sql = Payment::select('*');
+
+        $render = [];
+        if (isset($request->method_name)) {
+            $sql->where('method_name', 'like', '%'.$request->method_name.'%');
+            $render['method_name'] = $request->method_name;
+        }
+        if (isset($request->status)) {
+            $sql->where('status', $request->status);
+            $render['status'] = $request->status;
+        }
+
+        $data = $sql->paginate(2);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+        return view('admin.settings.payment.index',compact('data','status'));
     }
 
     /**

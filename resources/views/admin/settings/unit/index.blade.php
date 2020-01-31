@@ -46,9 +46,8 @@
                                         <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;">
                                             <select class="form-control form-control-sm" name="status" onchange="search_post()">
                                                 <option value="">Select Status</option>
-{{--                                                {{ dd($status)}}--}}
-                                                <option value="1" @if($status == 1) selected @endif>Active</option>
-                                                <option value="0" @if($status == 0) selected @endif>Inactive</option>
+                                                <option value="1" @if($status == '1') selected @endif>Active</option>
+                                                <option value="0" @if($status == '0') selected @endif>Inactive</option>
                                             </select>
                                         </div>
                                         <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">

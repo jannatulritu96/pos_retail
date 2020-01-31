@@ -17,6 +17,7 @@ class UnitController extends Controller
     {
         $sql = Unit::select('*');
         $render = [];
+
         if (isset($request->unit)) {
             $sql->where('unit', 'like', '%'.$request->unit.'%');
             $render['unit'] = $request->unit;
@@ -30,7 +31,6 @@ class UnitController extends Controller
         $data->appends($render);
 
         $status = (isset($request->status)) ? $request->status : '';
-
 
 
         return view('admin.settings.unit.index',compact('data','status'));

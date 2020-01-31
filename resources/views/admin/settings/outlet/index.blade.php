@@ -50,57 +50,57 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <table id="default_order" class="table table-striped border display" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Sl</th>
-                                    <th>Name</th>
-                                    <th>Code No.</th>
-                                    <th>Email</th>
-                                    <th>Mobile No.</th>
-                                    <th>fax</th>
-                                    <th>Address</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($outlets as $outlet)
-                                <tr>
-                                    <td>{{ $outlet->id }}</td>
-                                    <td>{{ $outlet->name }}</td>
-                                    <td>{{ $outlet->code }}</td>
-                                    <td>{{ $outlet->email }}</td>
-                                    <td>{{ $outlet->phone }}</td>
-                                    <td>{{ $outlet->fax }}</td>
-                                    <td>{{ $outlet->address }}</td>
-                                    <td class="text-center">
-                                        @if($outlet->status == 1)
-                                            <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
-                                        @else($outlet->status == 0)
-                                            <span style="font-size: 16px;" class="badge badge-pill badge-danger">Inactive</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-right">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default">Action</button>
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                <span class="caret"></span>
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <ul class="dropdown-menu pull-right" role="menu">
-                                                <li><a class="dropdown-item" href="{{ route('outlet.edit',$outlet->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
-                                                <li><a class="dropdown-item" href="" onclick="updateStatus({{ $outlet->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
-                                                <li><div role="separator" class="dropdown-divider"></div></li>
-                                                <li>
-                                                    <a type="button"  onclick="deleteconfirm('{{ $outlet->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                                        <thead>
+                                            <tr>
+                                                <th>Sl</th>
+                                                <th>Name</th>
+                                                <th>Code No.</th>
+                                                <th>Email</th>
+                                                <th>Mobile No.</th>
+                                                <th>fax</th>
+                                                <th>Address</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-right">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($outlets as $outlet)
+                                            <tr>
+                                                <td>{{ $outlet->id }}</td>
+                                                <td>{{ $outlet->name }}</td>
+                                                <td>{{ $outlet->code }}</td>
+                                                <td>{{ $outlet->email }}</td>
+                                                <td>{{ $outlet->phone }}</td>
+                                                <td>{{ $outlet->fax }}</td>
+                                                <td>{{ $outlet->address }}</td>
+                                                <td class="text-center">
+                                                    @if($outlet->status == 1)
+                                                        <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
+                                                    @else($outlet->status == 0)
+                                                        <span style="font-size: 16px;" class="badge badge-pill badge-danger">Inactive</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-right">
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default">Action</button>
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul class="dropdown-menu pull-right" role="menu">
+                                                            <li><a class="dropdown-item" href="{{ route('outlet.edit',$outlet->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                            <li><a class="dropdown-item" href="" onclick="updateStatus({{ $outlet->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
+                                                            <li><div role="separator" class="dropdown-divider"></div></li>
+                                                            <li>
+                                                                <a type="button"  onclick="deleteconfirm('{{ $outlet->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
