@@ -2,7 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c048f104-e3dd-4fc5-a25e-a01252991157" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/products/category/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/products/category/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/products/category/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/products/product/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/products/product/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/products/product/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Settings/CompanySettingsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Settings/CompanySettingsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/_head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/_head.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/_left-sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/_left-sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/layouts/_scripts.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/layouts/_scripts.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/company/company_setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/company/company_setting.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/customer/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/customer/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/outlet/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/outlet/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/payment/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/payment/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/supplier/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/supplier/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/unit/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/unit/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/unit/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/unit/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+>>>>>>> 402c34e047a695cbea41aaa1a470de8e739a1dd7
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,11 +135,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/settings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/products" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\pos_retail\resources\views\admin\products" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\pos_retail\resources\views\admin\products" />
+      <recent name="D:\xampp\htdocs\pos_retail\resources\views\admin\products\product" />
       <recent name="D:\xampp\htdocs\pos_retail\resources\views\admin\settings" />
     </key>
   </component>
@@ -154,8 +180,17 @@
       <workItem from="1580104288114" duration="125000" />
       <workItem from="1580104415061" duration="19682000" />
       <workItem from="1580142909719" duration="4439000" />
+<<<<<<< HEAD
       <workItem from="1580577782115" duration="13000" />
       <workItem from="1580650220977" duration="149000" />
+=======
+<<<<<<< Updated upstream
+      <workItem from="1580290069155" duration="117000" />
+      <workItem from="1580290196943" duration="1067000" />
+=======
+      <workItem from="1580268664788" duration="20521000" />
+>>>>>>> Stashed changes
+>>>>>>> 402c34e047a695cbea41aaa1a470de8e739a1dd7
     </task>
     <servers />
   </component>
@@ -163,10 +198,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="690" y="316" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580202210265">
+    <state x="690" y="316" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1580286282923">
       <screen x="0" y="40" width="1920" height="1040" />
     </state>
-    <state x="690" y="316" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580202210265" />
+    <state x="690" y="316" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580286282923" />
     <state x="367" y="20" width="645" height="688" key="#phpunit.xml" timestamp="1580147936174">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -180,10 +215,28 @@
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1580147077355" />
     <state x="727" y="451" key="NewPhpFileDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580188533312" />
+<<<<<<< HEAD
     <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1580650267644">
-      <screen x="0" y="0" width="1366" height="728" />
+=======
+<<<<<<< Updated upstream
+    <state x="533" y="310" key="com.intellij.ide.util.TipDialog" timestamp="1580290197471">
+      <screen x="0" y="40" width="1920" height="1040" />
+=======
+    <state width="536" height="446" key="SwitcherDM" timestamp="1580286347144">
+      <screen x="0" y="40" width="1920" height="1040" />
     </state>
+    <state width="536" height="446" key="SwitcherDM/0.40.1920.1040@0.40.1920.1040" timestamp="1580286347144" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1580142914389">
+>>>>>>> 402c34e047a695cbea41aaa1a470de8e739a1dd7
+      <screen x="0" y="0" width="1366" height="728" />
+>>>>>>> Stashed changes
+    </state>
+<<<<<<< HEAD
     <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580650267644" />
     <state x="533" y="310" key="com.intellij.ide.util.TipDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580104289232" />
+=======
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580142914389" />
+    <state x="533" y="310" key="com.intellij.ide.util.TipDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580290197471" />
+>>>>>>> 402c34e047a695cbea41aaa1a470de8e739a1dd7
   </component>
 </project>

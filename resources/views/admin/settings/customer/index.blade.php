@@ -5,7 +5,7 @@
 <div class="page-breadcrumb border-bottom">
         <div class="row">
             <div class="col-lg-3 col-md-4 col-xs-12 align-self-center">
-                <h5 class="font-medium text-uppercase mb-0">Dashboard</h5>
+                <h5 class="font-medium text-uppercase mb-0">Point of Sales</h5>
             </div>
             <div class="col-lg-9 col-md-8 col-xs-12 align-self-center">
                 <nav aria-label="breadcrumb" class="mt-2 float-md-right float-left">
@@ -30,13 +30,26 @@
                                 <h4 class="card-title">Customer list</h4>
                             </div>
                             <div class="col-md-6">
-{{--                                <button type="submit" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create Customer</button>--}}
                                 <a href="{{ route('customer.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create Customer</a>
                             </div>
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table id="default_order" class="table table-striped border display" style="width:100%">
+                        <div id="default_order_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="default_order_length">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="default_order_filter" class="dataTables_filter" style="float: right;">
+                                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="default_order"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="default_order" class="table table-striped border display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sl</th>
@@ -72,11 +85,10 @@
                                             </button>
                                             <ul class="dropdown-menu pull-right" role="menu">
                                                 <li><a class="dropdown-item" href="{{ route('customer.edit',$customer->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a></li>
                                                 <li><a class="dropdown-item" href="" onclick="updateStatus({{ $customer->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                 <li><div role="separator" class="dropdown-divider"></div></li>
                                                 <li>
-                                                    <button type="button"  onclick="deleteconfirm('{{ $customer->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</button>
+                                                    <a type="button"  onclick="deleteconfirm('{{ $customer->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -85,6 +97,9 @@
                             @endforeach
                             </tbody>
                         </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

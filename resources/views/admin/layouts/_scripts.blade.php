@@ -27,7 +27,7 @@
 <script src="{{ asset('assets/dist/js/pages/dashboards/dashboard1.js') }}"></script>
 <script src="{{ asset('assets/assets/libs/moment/min/moment.min.js') }}"></script>
 <script src="{{ asset('assets/assets/libs/fullcalendar/dist/fullcalendar.min.js') }}"></script>
-<script src="{{ asset('assets/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+{{--<script src="{{ asset('assets/assets/extra-libs/datatables.net/js/jquery.dataTables.min.js') }}"></script>--}}
 <script src="{{ asset('assets/dist/js/pages/datatable/datatable-basic.init.js') }}"></script>
 <script src="{{ asset('assets/dist/js/pages/calendar/cal-init.js') }}"></script>
 <script>
@@ -36,3 +36,7 @@
 </script>
 <!--ck editor js -->
 <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<!-- select2 JS -->
+<script src="{{ asset('assets/assets/libs/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('assets/assets/libs/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ asset('assets/dist/js/pages/forms/select2/select2.init.js') }}"></script>

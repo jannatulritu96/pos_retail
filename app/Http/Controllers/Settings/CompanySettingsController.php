@@ -2,84 +2,68 @@
 
 namespace App\Http\Controllers\Settings;
 
+use App\CompanySetting;
+use App\Customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class CompanySettingsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function Setting()
     {
-        return view('admin.settings.company.company_setting');
+        $customer = Customer::where('status','1')->get();
+        $setting = CompanySetting::find(1);
+        return view('admin.settings.company.company_setting',compact('customer','setting'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function UpdateWebsite(Request $request)
     {
+        $request->validate([
+            'company_name'=>'required',
+            'company_email'=>'required',
+            'company_phone'=>'required',
+            'currency_code'=>'required',
+            'tax'=>'required',
+            'vat'=>'required',
+            'date'=>'required',
+            'pagination'=>'required',
+            'year'=>'required',
+            'stock_out_method'=>'required',
+            'customer'=>'required',
+//            'company_logo'=>'mimes:png,jpg,jpeg'
+        ]);
 
-    }
+        $data = [
+            'company_name' => $request->company_name,
+            'company_email' => $request->company_email,
+            'company_phone' => $request->company_phone,
+            'currency_code' => $request->currency_code,
+            'tax' => $request->tax,
+            'vat' => $request->vat,
+            'date' => $request->date,
+            'pagination' => $request->pagination,
+            'year' => $request->year,
+            'stock_out_method' => $request->stock_out_method,
+            'customer' => $request->customer,
+        ];
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($request->hasFile('company_logo')) {
+            $setting = CompanySetting::first();
+//            $old_file = $setting->company_logo;
+            $photo= $request->file('company_logo');
+            $photo->move('assets/company_logo/',$photo->getClientOriginalName());
+            $data['company_logo'] = 'assets/company_logo/'.$photo->getClientOriginalName();
+//            unlink($old_file);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $company = CompanySetting::updateOrCreate(['id' => 1], $data);
+        if ($company) {
+            session()->flash('success','Information stored successfully');
+        } else {
+            session()->flash('success','Information stored successfully');
+        }
+        return redirect()->back();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        //end update company logo
     }
 }

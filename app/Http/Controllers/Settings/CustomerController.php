@@ -99,9 +99,9 @@ class CustomerController extends Controller
             'address' => $request->address,
         ]);
         if ($customer) {
-            session()->flash('success','Group stored successfully');
+            session()->flash('success','Customer stored successfully');
         } else {
-            session()->flash('success','Group stored successfully');
+            session()->flash('success','Customer stored successfully');
         }
         return redirect()->route('customer.index');
 
