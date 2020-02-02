@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c048f104-e3dd-4fc5-a25e-a01252991157" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/settings/company/company_setting.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/settings/company/company_setting.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,6 +154,8 @@
       <workItem from="1580104288114" duration="125000" />
       <workItem from="1580104415061" duration="19682000" />
       <workItem from="1580142909719" duration="4439000" />
+      <workItem from="1580577782115" duration="13000" />
+      <workItem from="1580650220977" duration="149000" />
     </task>
     <servers />
   </component>
@@ -179,10 +180,10 @@
     </state>
     <state x="517" y="288" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1580147077355" />
     <state x="727" y="451" key="NewPhpFileDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580188533312" />
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1580142914389">
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog" timestamp="1580650267644">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580142914389" />
+    <state x="379" y="189" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1580650267644" />
     <state x="533" y="310" key="com.intellij.ide.util.TipDialog/0.40.1920.1040@0.40.1920.1040" timestamp="1580104289232" />
   </component>
 </project>
