@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Outlet list</h4>
+                                <h4 class="card-title">Unit list</h4>
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('outlet.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create Outlet</a>
@@ -42,9 +42,22 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="default_order_filter" class="dataTables_filter" style="float: right;">
-                                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="default_order"></label>
-                                    </div>
+                                    <form method="get" class="form-horizontal" action="{{route('outlet.index')}}" >
+                                        <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;">
+                                            <select class="form-control form-control-sm" name="status" onchange="search_post()">
+                                                <option value="">Select Status</option>
+                                                <option value="1" @if($status == '1') selected @endif>Active</option>
+                                                <option value="0" @if($status == '0') selected @endif>Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
+                                            <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"
+                                                   value="{{Request::get('outlet')}}" onchange="search_post()">
+                                        </div>
+                                        <div class="col-sm-2" style="margin-left: 1144px; margin-top: -38px;display: none">
+                                            <button id="search" type="submit" class="btn btn-primary">Search</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row">
@@ -64,7 +77,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($outlets as $outlet)
+                                        @foreach($data as $outlet)
                                             <tr>
                                                 <td>{{ $outlet->id }}</td>
                                                 <td>{{ $outlet->name }}</td>
@@ -101,7 +114,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                {{ $data->links() }}
+                                    {{ $data->links() }}
                                 </div>
                             </div>
                         </div>
@@ -171,5 +184,8 @@
             })
         }
 
+        function search_post() {
+            $('#search').click()
+        }
     </script>
 @endsection

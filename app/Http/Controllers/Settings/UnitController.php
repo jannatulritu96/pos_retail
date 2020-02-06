@@ -20,14 +20,12 @@ class UnitController extends Controller
 
         if (isset($request->unit)) {
             $sql->where('unit', 'like', '%'.$request->unit.'%');
-            $render['unit'] = $request->unit;
         }
         if (isset($request->status)) {
             $sql->where('status', $request->status);
-            $render['status'] = $request->status;
         }
 
-        $data = $sql->paginate(2);
+        $data = $sql->paginate(30);
         $data->appends($render);
 
         $status = (isset($request->status)) ? $request->status : '';

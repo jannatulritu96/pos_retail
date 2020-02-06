@@ -75,17 +75,10 @@
                                     @enderror
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
-<<<<<<< HEAD
                                     <label for="tax">Tax%</label>
-                                    <input id="tax" type="number" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ old('tax') }}" aria-label="Username" aria-describedby="basic-addon1" style="width: 91%;margin-left: 5px;">
+                                    <input id="tax" type="number" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ old('tax') }}" aria-label="Username" aria-describedby="basic-addon1" style="width: 95%;margin-left: 5px;">
                                     <div class="input-group-append" style="float: right;margin-top: -35px;">
                                         <span class="input-group-text">%</span>
-=======
-                                    <label for="tax">Tax</label>
-                                    <input id="tax" type="number" class="form-control @error('tax') is-invalid @enderror" name="tax" placeholder="Tax" value="{{ !empty($setting)?$setting->tax:'' }}" style="width: 94%;">
-                                    <div class="input-group-append float-right">
-                                        <span class="input-group-text" style="margin-top: -36px;margin-right: 8px;">%</span>
->>>>>>> 402c34e047a695cbea41aaa1a470de8e739a1dd7
                                     </div>
                                     @error('tax')
                                     <span class="invalid-feedback" role="alert">
@@ -94,17 +87,10 @@
                                     @enderror
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
-<<<<<<< HEAD
                                     <label for="vat">Vat%</label>
-                                    <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ old('vat') }}" aria-label="Username" aria-describedby="basic-addon1" style="width: 91%;margin-left: 5px;">
+                                    <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ old('vat') }}" aria-label="Username" aria-describedby="basic-addon1" style="width: 95%;margin-left: 5px;">
                                     <div class="input-group-append" style="float: right;margin-top: -35px;">
                                         <span class="input-group-text">%</span>
-=======
-                                    <label for="vat">Vat</label>
-                                    <input id="vat" type="number" class="form-control @error('vat') is-invalid @enderror" name="vat" placeholder="Vat" value="{{ !empty($setting)?$setting->vat:'' }}" style="width: 94%;">
-                                    <div class="input-group-append float-right">
-                                        <span class="input-group-text" style="margin-top: -36px;margin-right: 8px;">%</span>
->>>>>>> 402c34e047a695cbea41aaa1a470de8e739a1dd7
                                     </div>
                                     @error('vat')
                                     <span class="invalid-feedback" role="alert">
@@ -121,19 +107,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                </div>
-                                <div class="form-group col-md-2">
-                                    <label class="required">Pagination Per Page</label>
-                                    <select class="form-control select2-hidden-accessible" name="pagination_per_page" tabindex="-1" aria-hidden="true">
-                                        <option value="15" selected="">15</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    <span class="select2 select2-container select2-container--default select2-container--above" dir="ltr" style="width: 156px;">
-                                        <span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-pagination_per_page-o1-container"><span class="select2-selection__rendered" id="select2-pagination_per_page-o1-container" title="15">15</span>
-                                                <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span>
-                                        <span class="dropdown-wrapper" aria-hidden="true"></span></span>
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="pagination">Pagination<span
@@ -187,7 +160,7 @@
                                 </div>
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="customer">Customer</label>
-                                    <select class="form-control select2" name="customer" value="{{ !empty($setting)?$setting->customer:'' }}" style="width: 100%;">
+                                    <select class="form-control select2" name="customer" value="{{ !empty($setting)?$setting->customer:'' }}" style="width: 98%;">
                                         <option>Select customer</option>
                                         @foreach($customer as $custom)
                                             <option value="{{$custom->id}}" @if(isset($setting) &&  $setting->customer == $custom->id) selected @endif>{{ $custom->name }}</option>

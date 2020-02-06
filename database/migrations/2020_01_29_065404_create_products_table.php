@@ -19,7 +19,8 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('name');
             $table->string('code');
-            $table->string('unit');
+            $table->unsignedBigInteger('unit');
+            $table->foreign('unit')->references('id')->on('units');
             $table->string('purchase');
             $table->string('sell');
             $table->string('image');

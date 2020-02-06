@@ -13,10 +13,33 @@ class OutletController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $outlets= Outlet::get();
-        return view('admin.settings.outlet.index',compact('outlets'));
+        $sql = Outlet::select('*');
+        $render = [];
+
+
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->where('name', '=', $request->search)
+                    ->orwhere('email', '=', $request->search)
+                    ->orwhere('phone', '=', $request->search)
+                    ->orwhere('fax', '=', $request->search)
+                    ->orwhere('address', '=', $request->search);
+            });
+        }
+
+        if (isset($request->status)) {
+            $sql->where('status', $request->status);
+        }
+
+        $data = $sql->paginate(2);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+
+
+        return view('admin.settings.outlet.index',compact('data','status'));
     }
 
     /**

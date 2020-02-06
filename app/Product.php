@@ -14,6 +14,6 @@ class Product extends Model
     }
     public function relUnit()
     {
-        return $this->hasMany('App\Unit');
+        return $this->belongsTo('App\Unit','unit','id');
     }
 }

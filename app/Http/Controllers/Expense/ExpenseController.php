@@ -17,27 +17,54 @@ class ExpenseController extends Controller
      */
     public function index(Request $request)
     {
-        $sql= Expense::select('*');
-        $data= $sql->with(['relOutlet','relExpenseCategory'])->paginate(2);
+        $sql = Expense::with(['relOutlet','relExpenseCategory']);
+        $render = [];
 
-         $render = [];
 
-        if (isset($request->unit)) {
-            $sql->where('unit', 'like', '%'.$request->unit.'%');
-            $render['unit'] = $request->unit;
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->orWhereHas('relOutlet', function($qK) use($request){
+                    $qK->where('outlet', '=', $request->search);
+                });
+                $q->orWhereHas('relExpenseCategory', function($qK) use($request){
+                    $qK->where('exp_cat', '=', $request->search);
+                });
+//
+//                where('outlet', '=', $request->search)
+//                    ->orwhere('exp_cat', '=', $request->search);
+            });
         }
+
         if (isset($request->status)) {
             $sql->where('status', $request->status);
-            $render['status'] = $request->status;
         }
 
-//        $data = $sql->paginate(2);
+        $data = $sql->paginate(30);
         $data->appends($render);
 
         $status = (isset($request->status)) ? $request->status : '';
 
 
         return view('admin.expense.expense.index',compact('data','status'));
+    }
+
+    public function search(Request $request)
+    {
+
+        if(isset($request->search)){
+            $hostels = Area::with('relHostel')->join('hostels as h','areas.id' ,'=' ,'h.area_id')
+                ->where('areas.name','like','%' .$request->search. '%')
+                ->orWhere('h.name','like','%' .$request->search. '%')
+                ->get();
+
+        }
+        $data['hostels'] =  $hostels ;
+        $data['hostel_details']= Hostel::with(['relArea'])->get();
+        // dd($data);
+
+
+        return view('frontend.search',$data);
+
     }
 
     /**

@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Product list</h4>
+                                <h4 class="card-title">Unit list</h4>
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('product.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create product</a>
@@ -42,9 +42,22 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-                                    <div id="default_order_filter" class="dataTables_filter" style="float: right;">
-                                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="default_order"></label>
-                                    </div>
+                                    <form method="get" class="form-horizontal" action="{{route('product.index')}}" >
+                                        <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;">
+                                            <select class="form-control form-control-sm" name="status" onchange="search_post()">
+                                                <option value="">Select Status</option>
+                                                <option value="1" @if($status == '1') selected @endif>Active</option>
+                                                <option value="0" @if($status == '0') selected @endif>Inactive</option>
+                                            </select>
+                                        </div>
+                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
+                                            <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"
+                                                   value="{{Request::get('product')}}" onchange="search_post()">
+                                        </div>
+                                        <div class="col-sm-2" style="margin-left: 1144px; margin-top: -38px;display: none">
+                                            <button id="search" type="submit" class="btn btn-primary">Search</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row">
@@ -66,15 +79,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($products as $product)
+                                        @foreach($data as $product)
                                             <tr>
                                                 <td>{{ $product->id }}</td>
-                                                <td> <img style="width: 60px;" src="{{ asset($product->image) }}"> </td>
+                                                <td><img style="width: 60px;" src="{{ asset($product->image) }}"></td>
                                                 <td>{{ $product->barcode }}</td>
                                                 <td>{{ $product->relCategory->category }}</td>
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $product->code }}</td>
-                                                <td>{{ $product->unit }}</td>
+                                                <td>{{ $product->relUnit->unit }}</td>
                                                 <td class="text-right">{{ $product->purchase }}/-</td>
                                                 <td class="text-right">{{ $product->sell }}/-</td>
                                                 <td class="text-center">
@@ -105,6 +118,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
+                                    {{ $data->links() }}
                                 </div>
                             </div>
                         </div>
@@ -173,5 +187,8 @@
             })
         }
 
+        function search_post() {
+            $('#search').click()
+        }
     </script>
 @endsection

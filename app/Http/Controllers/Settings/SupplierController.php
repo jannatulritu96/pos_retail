@@ -13,10 +13,31 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $suppliers= Supplier::get();
-        return view('admin.settings.supplier.index',compact('suppliers'));
+        $sql = Supplier::select('*');
+        $render = [];
+
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->where('name', '=', $request->search)
+                    ->orwhere('email', '=', $request->search)
+                    ->orwhere('phone', '=', $request->search)
+                    ->orwhere('fax', '=', $request->search)
+                    ->orwhere('address', '=', $request->search);
+            });
+        }
+
+        if (isset($request->status)) {
+            $sql->where('status', $request->status);
+        }
+
+        $data = $sql->paginate(30);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+
+        return view('admin.settings.supplier.index',compact('data','status'));
     }
 
     /**

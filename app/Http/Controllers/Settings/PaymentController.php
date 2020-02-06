@@ -20,14 +20,12 @@ class PaymentController extends Controller
         $render = [];
         if (isset($request->method_name)) {
             $sql->where('method_name', 'like', '%'.$request->method_name.'%');
-            $render['method_name'] = $request->method_name;
         }
         if (isset($request->status)) {
             $sql->where('status', $request->status);
-            $render['status'] = $request->status;
         }
 
-        $data = $sql->paginate(2);
+        $data = $sql->paginate(30);
         $data->appends($render);
 
         $status = (isset($request->status)) ? $request->status : '';

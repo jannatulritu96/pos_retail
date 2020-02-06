@@ -10,7 +10,7 @@ class Unit extends Model
 
     public function relProduct()
     {
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Product','unit','id');
     }
 
 }

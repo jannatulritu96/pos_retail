@@ -13,10 +13,30 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers= Customer::get();
-        return view('admin.settings.customer.index',compact('customers'));
+        $sql = Customer::select('*');
+        $render = [];
+
+
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->where('name', '=', $request->search)
+                    ->orwhere('email', '=', $request->search)
+                    ->orwhere('phone', '=', $request->search)
+                    ->orwhere('address', '=', $request->search);
+            });
+        }
+
+        if (isset($request->status)) {
+            $sql->where('status', $request->status);
+        }
+
+        $data = $sql->paginate(2);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+        return view('admin.settings.customer.index',compact('data','status'));
     }
 
     /**

@@ -51,12 +51,8 @@
                                             </select>
                                         </div>
                                         <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
-{{--                                            <select class="form-control select2" style="width: 100%;" name="outlet">--}}
-{{--                                                <option>Select outlet</option>--}}
-{{--                                                @foreach($data as $outlet)--}}
-{{--                                                    <option value="{{$outlet->id}}">{{ $outlet->name }}</option>--}}
-{{--                                                @endforeach--}}
-{{--                                            </select>--}}
+                                            <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"
+                                                   value="{{Request::get('expense')}}" onchange="search_post()">
                                         </div>
                                         <div class="col-sm-2" style="margin-left: 1144px; margin-top: -38px;display: none">
                                             <button id="search" type="submit" class="btn btn-primary">Search</button>
@@ -186,6 +182,8 @@
                 return false;
             })
         }
-
+        function search_post() {
+            $('#search').click()
+        }
     </script>
 @endsection
