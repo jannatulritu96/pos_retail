@@ -126,15 +126,15 @@
                                 @enderror
                             </div>
                             <hr>
-                            <div class="col-md-12">
-                                <div class="row">
+                            <div class="col-md-12" id="productDiv">
+                                <div class="row" id="productRow0">
                                     <div class="form-group col-md-1 mt-4">
-                                        <label class="visible-xs invisible">X</label>
-                                        <a class="btn btn-warning btn-flat" disabled>X</a>
+                                        <label class="visible-xs invisible">+</label>
+                                        <a class="btn btn-warning btn-flat" onclick="addRow()">+</a>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="product">Product</label>
-                                        <select class="form-control select2" style="width: 100%;" name="product"  id="product"  onchange="setUnitPrice(0)">
+                                        <select class="form-control select2" style="width: 100%;" name="product" id="product0"  onchange="setUnitPrice(0)">
                                             <option>Select product</option>
                                             @foreach($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -148,7 +148,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="note">Receive Quantity</label>
-                                        <input id="rcv_qty" type="text" class="form-control  @error('rcv_qty') is-invalid @enderror" name="rcv_qty"  placeholder="Receive Quantity" id="rcv_qty"  onkeyup="chkPrice(0)">
+                                        <input type="number" class="form-control  @error('rcv_qty') is-invalid @enderror" name="rcv_qty" id="rcv_qty0" placeholder="Receive Quantity" onkeyup="chkPrice(0)">
                                         @error('rcv_qty')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -157,7 +157,7 @@
                                     </div>
                                     <div class="form-group  col-md-2">
                                         <label for="unit_price">Unit Price (Tk)</label>
-                                        <input id="unit_price" type="number" class="form-control  @error('unit_price') is-invalid @enderror" name="unit_price"  placeholder="Unit Price (Tk)" id="unit_price"  onkeyup="chkPrice(0)">
+                                        <input type="number" class="form-control  @error('unit_price') is-invalid @enderror" name="unit_price" id="unit_price0" placeholder="Unit Price (Tk)" onkeyup="chkPrice(0)">
                                         @error('unit_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="form-group col-md-3 float-right">
                                         <label for="total_price">Total Price (Tk)</label>
-                                        <input id="total_price" type="number" class="form-control  @error('total_price') is-invalid @enderror" name="total_price"  placeholder="Total Price (Tk)" id="total_price" readonly>
+                                        <input type="number" class="form-control  @error('total_price') is-invalid @enderror" name="total_price" id="total_price0" placeholder="Total Price (Tk)" readonly>
                                         @error('total_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -181,7 +181,7 @@
                                     <div class="form-group col-md-2"></div>
                                     <div class="form-group col-md-3">
                                         <label for="total_qty">Total Qty</label>
-                                        <input id="total_qty" type="number" class="form-control  @error('total_qty') is-invalid @enderror" name="total_qty"  placeholder="Total Quantity" id="total_qty" readonly>
+                                        <input type="number" class="form-control  @error('total_qty') is-invalid @enderror" name="total_qty" id="total_qty" placeholder="Total Quantity" readonly>
                                         @error('total_qty')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -191,7 +191,7 @@
                                     <div class="form-group col-md-2"></div>
                                     <div class="form-group col-md-3">
                                         <label for="total_amount">Total Amount(Tk)</label>
-                                        <input id="total_amount" type="number" class="form-control  @error('total_amount') is-invalid @enderror" name="total_amount"  placeholder="Total Amount(Tk)" id="total_amount" readonly>
+                                        <input type="number" class="form-control  @error('total_amount') is-invalid @enderror" name="total_amount" id="total_amount" placeholder="Total Amount(Tk)" readonly>
                                         @error('total_amount')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -209,7 +209,7 @@
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label for="tax">Tax(15.00%) (Tk)</label>
-                                            <input id="tax" type="number" class="form-control  @error('tax') is-invalid @enderror" name="tax"  placeholder="Tax(15.00%) (Tk)" id="tax" readonly>
+                                            <input type="number" class="form-control  @error('tax') is-invalid @enderror" name="tax" id="tax" placeholder="Tax(15.00%) (Tk)" readonly>
                                             @error('tax')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -218,7 +218,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="discount_amount">Discount Amount(Tk)</label>
-                                            <input id="discount_amount" type="number" class="form-control  @error('discount_amount') is-invalid @enderror" name="discount_amount"  placeholder="Discount Amount(Tk)" id="discount_amount" onkeyup="totalCal()">
+                                            <input type="number" class="form-control  @error('discount_amount') is-invalid @enderror" name="discount_amount" id="discount_amount" placeholder="Discount Amount(Tk)" onkeyup="totalCal()">
                                             @error('discount_amount')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -227,7 +227,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="payable_amount">Payable Amount(Tk)</label>
-                                            <input id="payable_amount" type="number" class="form-control  @error('payable_amount') is-invalid @enderror" name="payable_amount"  placeholder="Payable Amount(Tk)" id="payable_amount" readonly>
+                                            <input type="number" class="form-control  @error('payable_amount') is-invalid @enderror" name="payable_amount" id="payable_amount" placeholder="Payable Amount(Tk)" readonly>
                                             @error('payable_amount')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -236,16 +236,16 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="paid_amount">Paid Amount(Tk)</label>
-                                            <input id="paid_amount" type="number" class="form-control  @error('paid_amount') is-invalid @enderror" name="paid_amount"  placeholder="Paid Amount(Tk)" id="paid_amount" onkeyup="totalCal()">
+                                            <input type="number" class="form-control  @error('paid_amount') is-invalid @enderror" name="paid_amount" id="paid_amount" placeholder="Paid Amount(Tk)" onkeyup="totalCal()">
                                             @error('paid_amount')
-                                            <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="due_amount">Due Amount(Tk)</label>
-                                            <input id="due_amount" type="number" class="form-control  @error('due_amount') is-invalid @enderror" name="due_amount"  placeholder="Due Amount(Tk)" id="due_amount" readonly>
+                                            <input type="number" class="form-control  @error('due_amount') is-invalid @enderror" name="due_amount" id="due_amount" placeholder="Due Amount(Tk)" readonly>
                                             @error('due_amount')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -308,4 +308,86 @@
             </div>
         </div>
     </section>
+    <script>
+        function addRow() {
+            var productDiv = $('#productDiv ').length;
+
+            var html = `<div class="row" id="productRow`+productDiv+`">`;
+            if(productDiv > 0) {
+                html += `<div class="form-group col-md-1 mt-4">
+                    <label class="visible-xs invisible">X</label>
+                    <a class="btn btn-warning btn-flat" onclick="removeRow(`+productDiv+`)">X</a>
+                </div>`;
+            } else {
+                html += `<div class="form-group col-md-1 mt-4">
+                    <label class="visible-xs invisible">+</label>
+                    <a class="btn btn-warning btn-flat" onclick="addRow()">+</a>
+                </div>`;
+            }
+
+            html += `<div class="form-group col-md-3">
+                    <label for="product">Product</label>
+                    <select class="form-control select2" style="width: 100%;" name="product" id="product`+productDiv+`" onchange="setUnitPrice(`+productDiv+`)">
+                        <option>Select product</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="note">Receive Quantity</label>
+                    <input type="number" class="form-control" name="rcv_qty" id="rcv_qty`+productDiv+`" placeholder="Receive Quantity" onkeyup="chkPrice(`+productDiv+`)">
+                </div>
+                <div class="form-group  col-md-2">
+                    <label for="unit_price">Unit Price (Tk)</label>
+                    <input type="number" class="form-control" name="unit_price" id="unit_price`+productDiv+`" placeholder="Unit Price (Tk)" onkeyup="chkPrice(`+productDiv+`)">
+                </div>
+                <div class="form-group col-md-3 float-right">
+                    <label for="total_price">Total Price (Tk)</label>
+                    <input type="number" class="form-control" name="total_price" id="total_price`+productDiv+`" placeholder="Total Price (Tk)" readonly>
+                </div>
+            </div>`;
+
+            $('#productDiv ').append(html);
+        }
+
+        function removeRow(productDiv) {
+            $('#productRow'+productDiv).remove();
+        }
+
+        function chkPrice(key) {
+            var rcv_qty = Number($('#rcv_qty'+key).val());
+            var unit_price = Number($('#unit_price'+key).val());
+
+            var total_price = (rcv_qty*unit_price)
+            $('#total_price'+key).val(total_price.toFixed(2));
+
+            totalCal();
+        }
+
+        function totalCal() {
+            var rcv_qty = 0;
+            $("input[id^= 'rcv_qty']").each(function(){
+                rcv_qty += +$(this).val();
+            });
+            $('#total_qty').val(rcv_qty.toFixed(2));
+            
+            var total_price = 0;
+            $("input[id^= 'total_price']").each(function(){
+                total_price += +$(this).val();
+            });
+            $('#total_amount').val(total_price.toFixed(2));
+
+            var tax = ((total_price*15)/100);
+            $('#tax').val(tax.toFixed(2));
+
+            var discount_amount = Number($('#discount_amount').val());
+
+            var payable_amount = ((total_price+tax)-discount_amount);
+            $('#payable_amount').val(payable_amount.toFixed(2));
+
+            var paid_amount = Number($('#paid_amount').val());
+
+            var due_amount = (payable_amount-paid_amount);
+            $('#due_amount').val(due_amount.toFixed(2));
+        }
+    </script>
 @endsection

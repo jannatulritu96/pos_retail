@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Inventory;
 
-use App\ExpenseCategory;
 use App\Outlet;
 use App\Product;
 use App\Stock_in;
@@ -45,7 +44,56 @@ class StockInController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'outlet'=>'required',
+            'supplier'=>'required',
+            'receive_no'=>'required',
+            'receive_date'=>'required',
+            'challan_no'=>'required',
+            'challan_date'=>'required',
+            'challan_doc'=>'required',
+            'receive_note'=>'required',
+            'product'=>'required',
+            'rcv_qty'=>'required',
+            'unit_price'=>'required',
+            'total_price'=>'required',
+            'total_qty'=>'required',
+            'total_amount'=>'required',
+            'tax'=>'required',
+            'discount_amount'=>'required',
+            'payable_amount'=>'required',
+            'paid_amount'=>'required',
+            'due_amount'=>'required',
+        ]);
+
+        $stocks = Stock_in::create([
+            'outlet' => $request->outlet,
+            'supplier' => $request->supplier,
+            'receive_no' => $request->receive_no,
+            'receive_date' => $request->receive_date,
+            'challan_no' => $request->challan_no,
+            'challan_date' => $request->challan_date,
+            'challan_doc' => $request->challan_doc,
+            'receive_note' => $request->receive_note,
+            'product' => $request->product,
+            'rcv_qty' => $request->rcv_qty,
+            'unit_price' => $request->unit_price,
+            'total_price' => $request->total_price,
+            'total_qty' => $request->total_qty,
+            'total_amount' => $request->total_amount,
+            'tax' => $request->tax,
+            'discount_amount' => $request->discount_amount,
+            'payable_amount' => $request->payable_amount,
+            'paid_amount' => $request->paid_amount,
+            'due_amount' => $request->due_amount,
+        ]);
+
+        if ($stocks) {
+            session()->flash('success','Product stock successfully');
+        } else {
+            session()->flash('error','Something was wrong!  ');
+        }
+        return redirect()->route('stock_in.index');
     }
 
     /**
