@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">expense list</h4>
+                                <h4 class="card-title">Expense list</h4>
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('expense.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Create expense</a>
@@ -124,7 +124,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 @section('script')
     <script>

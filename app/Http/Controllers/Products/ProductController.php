@@ -20,16 +20,22 @@ class ProductController extends Controller
 //        dd($request->all());
 
         $sql = Product::with(['relCategory','relUnit'])->select('*');
+
+        $categories = Category::where('status','1')->get();
         $render = [];
 
 
         if(isset($request->search)){
             $sql->where(function ($q) use($request){
-                $q->where('category_id', '=', $request->search)
-                    ->orwhere('name', '=', $request->search)
+                $q->where('name', '=', $request->search)
                     ->orwhere('code', '=', $request->search)
                     ->orwhere('unit', '=', $request->search);
             });
+        }
+
+        if (isset($request->category_id)) {
+            $sql->where('category_id', 'like', '%'.$request->category_id.'%');
+            $render['category_id'] = $request->category_id;
         }
 
         if (isset($request->status)) {
@@ -40,7 +46,7 @@ class ProductController extends Controller
         $data->appends($render);
 
         $status = (isset($request->status)) ? $request->status : '';
-        return view('admin.products.product.index',compact('data','status'));
+        return view('admin.products.product.index',compact('data','status','categories'));
     }
 
     /**
@@ -69,7 +75,7 @@ class ProductController extends Controller
             'name'=>'required',
             'code'=>'required',
             'unit'=>'required',
-            'purchase'=>'required',
+            'purchases'=>'required',
             'sell'=>'required',
             'details'=>'required',
         ]);

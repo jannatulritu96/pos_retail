@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Inventory;
 
-use App\Purchase;
+use App\ExpenseCategory;
+use App\Outlet;
+use App\Product;
+use App\Stock_in;
+use App\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PurchaseController extends Controller
+class StockInController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +19,9 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        $purchases = Purchase::get();
-        return view('admin.inventory.purchase.index',compact('purchases'));
+        $data = Stock_in::select('*');
+//        $render = [];
+        return view('admin.inventory.stock_in.index',compact('data'));
     }
 
     /**
@@ -26,7 +31,10 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        //
+        $outlets = Outlet::where('status','1')->get();
+        $suppliers = Supplier::where('status','1')->get();
+        $products = Product::where('status','1')->get();
+        return view('admin.inventory.stock_in.create',compact('outlets','suppliers','products'));
     }
 
     /**

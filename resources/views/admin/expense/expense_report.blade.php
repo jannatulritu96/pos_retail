@@ -34,14 +34,53 @@
                         <div class="table-responsive">
                             <div id="default_order_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dataTables_length" id="default_order_length">
+                                    <div class="col-sm-12">
+                                        <form method="get" class="form-horizontal" action="{{route('expense.search-report')}}" >
+                                        <div class="row">
+
+                                            <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-left: 17px">
+                                                <select class="form-control form-control-sm" name="exp_cat" id="category_type">
+                                                    <option value="">All Category</option>
+                                                    @foreach($exp_cats as $exp_cat)
+                                                        <option value="{{$exp_cat->id}}">{{ $exp_cat->cat_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-left: 5px">
+                                                <select class="form-control form-control-sm" name="outlet" id="outlet">
+                                                    <option value="">All Outlet</option>
+                                                    @foreach($outlets as $outlet)
+                                                        <option value="{{$outlet->id}}">{{ $outlet->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-left: 5px">
+                                                <input type="date"  name="expense_date" id="datepicker_start"  placeholder="Date to" class="form-control form-control-sm">
+                                            </div>
+                                            <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-left: 5px">
+                                                <input type="date"  name="expense_date" id="datepicker_start"  placeholder="Date From" class="form-control form-control-sm">
+                                            </div>
+
+                                            <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-left: 5px">
+                                                <input type="text" class="form-control form-control-sm " name="expense_no" placeholder="Expense No."
+                                                       value="{{Request::get('expense_no')}}">
+                                            </div>
+
+                                            <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;margin-left: 5px">
+                                                <select class="form-control form-control-sm" name="status">
+                                                    <option value="">Select Status</option>
+                                                    <option value="1" @if($status == '1') selected @endif>Active</option>
+                                                    <option value="0" @if($status == '0') selected @endif>Inactive</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="dataTables_filter">
+                                                <button type="submit" class="btn btn-primary" style="float: right;margin-left: 5px;padding: 2.1px 12px;">Search</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;">
-                                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="default_order"></label>
-                                        </div>
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -60,7 +99,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($expenses as $expense)
+                                @foreach($data as $expense)
                                     <tr>
                                         <td>{{ $expense->id }}</td>
                                         <td>{{ $expense->relOutlet->name }}</td>
@@ -93,4 +132,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        function search_post() {
+            $('#search').click()
+        }
+    </script>
 @endsection

@@ -18,22 +18,20 @@ class ExpenseController extends Controller
     public function index(Request $request)
     {
         $sql = Expense::with(['relOutlet','relExpenseCategory']);
+        $exp_cats = ExpenseCategory::where('status','1')->get();
+        $outlets = Outlet::where('status','1')->get();
         $render = [];
 
-
-        if(isset($request->search)){
-            $sql->where(function ($q) use($request){
-                $q->orWhereHas('relOutlet', function($qK) use($request){
-                    $qK->where('outlet', '=', $request->search);
-                });
-                $q->orWhereHas('relExpenseCategory', function($qK) use($request){
-                    $qK->where('exp_cat', '=', $request->search);
-                });
-//
-//                where('outlet', '=', $request->search)
-//                    ->orwhere('exp_cat', '=', $request->search);
-            });
+        if (isset($request->exp_cat)) {
+            $sql->where('exp_cat', 'like', '%'.$request->exp_cat.'%');
+            $render['exp_cat'] = $request->exp_cat;
         }
+
+        if (isset($request->outlet)) {
+            $sql->where('outlet', 'like', '%'.$request->outlet.'%');
+            $render['outlet'] = $request->outlet;
+        }
+
 
         if (isset($request->status)) {
             $sql->where('status', $request->status);
@@ -44,27 +42,7 @@ class ExpenseController extends Controller
 
         $status = (isset($request->status)) ? $request->status : '';
 
-
         return view('admin.expense.expense.index',compact('data','status'));
-    }
-
-    public function search(Request $request)
-    {
-
-        if(isset($request->search)){
-            $hostels = Area::with('relHostel')->join('hostels as h','areas.id' ,'=' ,'h.area_id')
-                ->where('areas.name','like','%' .$request->search. '%')
-                ->orWhere('h.name','like','%' .$request->search. '%')
-                ->get();
-
-        }
-        $data['hostels'] =  $hostels ;
-        $data['hostel_details']= Hostel::with(['relArea'])->get();
-        // dd($data);
-
-
-        return view('frontend.search',$data);
-
     }
 
     /**
@@ -226,8 +204,40 @@ class ExpenseController extends Controller
             return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
         }
     }
-    public function searchReport(){
+
+    public function searchReport(Request $request){
         $expenses = Expense::with(['relOutlet','relExpenseCategory'])->get();
-        return view('admin.expense.expense_report',compact('expenses'));
+        $sql = Expense::with(['relOutlet','relExpenseCategory']);
+        $exp_cats = ExpenseCategory::where('status','1')->get();
+        $outlets = Outlet::where('status','1')->get();
+        $render = [];
+
+        if (isset($request->exp_cat)) {
+            $sql->where('exp_cat', 'like', '%'.$request->exp_cat.'%');
+            $render['exp_cat'] = $request->exp_cat;
+        }
+
+        if (isset($request->outlet)) {
+            $sql->where('outlet', 'like', '%'.$request->outlet.'%');
+            $render['outlet'] = $request->outlet;
+        }
+
+        if (isset($request->expense_date)) {
+            $sql->where('expense_date', 'like', '%'.$request->expense_date.'%');
+            $render['expense_date'] = $request->cat_name;
+        }
+
+        if (isset($request->expense_no)) {
+            $sql->where('expense_no', 'like', '%'.$request->expense_no.'%');
+            $render['expense_no'] = $request->expense_no;
+        }
+
+        $data = $sql->paginate(30);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+
+
+        return view('admin.expense.expense_report',compact('data','status','exp_cats','outlets'));
     }
 }

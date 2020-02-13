@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('code');
             $table->unsignedBigInteger('unit');
             $table->foreign('unit')->references('id')->on('units');
-            $table->string('purchase');
+            $table->string('purchases');
             $table->string('sell');
             $table->string('image');
             $table->string('details');

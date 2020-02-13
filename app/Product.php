@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';
-    protected $fillable = ['category_id','name','code','unit','purchase','sell','details','status','image'];
+    protected $fillable = ['category_id','name','code','unit','purchases','sell','details','status','image'];
     public function relCategory()
     {
         return $this->belongsTo('App\Category','category_id','id');
@@ -15,5 +15,9 @@ class Product extends Model
     public function relUnit()
     {
         return $this->belongsTo('App\Unit','unit','id');
+    }
+    public function relPurchases()
+    {
+        return $this->hasOne('App\Purchases','product','id');
     }
 }

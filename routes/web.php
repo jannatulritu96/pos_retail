@@ -1,19 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 Auth::routes();
 
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+return redirect()->route('dashboard');
 })->name('home');
 
 // Change Password
@@ -27,7 +17,7 @@ Auth::routes([
 Route::get('dashboard','DashboardController@index')->name('dashboard');
 
 Route::group(['prefix' => 'settings'], function (){
-//    Route::resource('company-settings', 'Settings\CompanySettingsController');
+    //    Route::resource('company-settings', 'Settings\CompanySettingsController');
     //setting routes
     Route::get('/website-setting','Settings\CompanySettingsController@Setting')->name('setting');
     Route::post('/update-website', 'Settings\CompanySettingsController@UpdateWebsite')->name('setting.store');
@@ -60,13 +50,16 @@ Route::group(['prefix' => 'expenses'], function (){
     //expense_category route
     Route::resource('expense_category', 'Expense\ExpenseCategoryController');
     Route::post('/expense_category/change-activity/{id}', 'Expense\ExpenseCategoryController@changeActivity')->name('expense-category.change-activity');
-    //unit route
+    //expense route
     Route::resource('expense', 'Expense\ExpenseController');
     Route::post('/expense/change-activity/{id}', 'Expense\ExpenseController@changeActivity')->name('expense.change-activity');
     Route::get('/search-report', 'Expense\ExpenseController@searchReport')->name('expense.search-report');
 });
-Route::group(['prefix' => 'Inventory '], function (){
+Route::group(['prefix' => 'inventory '], function (){
     //Purchase  route
-    Route::resource('purchase', 'Inventory\PurchaseController');
-    Route::post('/purchase/change-activity/{id}', 'Inventory\PurchaseController@changeActivity')->name('purchase.change-activity');
+    Route::resource('purchases', 'Inventory\PurchasesController');
+    Route::post('/purchases/change-activity/{id}', 'Inventory\PurchasesController@changeActivity')->name('purchases.change-activity');
+    //Purchase  route
+    Route::resource('stock_in', 'Inventory\StockInController');
+    Route::post('/stock_in/change-activity/{id}', 'Inventory\StockInController@changeActivity')->name('stock-in.change-activity');
 });

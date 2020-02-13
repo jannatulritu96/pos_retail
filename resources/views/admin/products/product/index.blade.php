@@ -50,10 +50,21 @@
                                                 <option value="0" @if($status == '0') selected @endif>Inactive</option>
                                             </select>
                                         </div>
+
                                         <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
                                             <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"
                                                    value="{{Request::get('product')}}" onchange="search_post()">
                                         </div>
+
+                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
+                                            <select class="form-control form-control-sm" name="category_id" id="category_type" onchange="search_post()">
+                                                <option value="">All Category</option>
+                                                @foreach($categories as $cat)
+                                                    <option value="{{$cat->id}}">{{ $cat->category }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
                                         <div class="col-sm-2" style="margin-left: 1144px; margin-top: -38px;display: none">
                                             <button id="search" type="submit" class="btn btn-primary">Search</button>
                                         </div>

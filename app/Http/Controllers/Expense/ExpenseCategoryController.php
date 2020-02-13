@@ -13,10 +13,25 @@ class ExpenseCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = ExpenseCategory::get();
-        return view('admin.expense.expense_category.index',compact('categories'));
+        $sql = ExpenseCategory::select('*');
+        $render = [];
+
+        if (isset($request->cat_name)) {
+            $sql->where('cat_name', 'like', '%'.$request->cat_name.'%');
+            $render['cat_name'] = $request->cat_name;
+        }
+        if (isset($request->status)) {
+            $sql->where('status', $request->status);
+            $render['status'] = $request->status;
+        }
+
+        $data = $sql->paginate(2);
+        $data->appends($render);
+
+        $status = (isset($request->status)) ? $request->status : '';
+        return view('admin.expense.expense_category.index',compact('data','status'));
     }
 
     /**

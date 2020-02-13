@@ -83,8 +83,8 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="purchase">Purchase Price (Tk)<span
                                             style="color: red">*</span></label>
-                                    <input id="purchase" type="number" class="form-control @error('purchase') is-invalid @enderror" name="purchase" placeholder="Purchase Price" value="{{ $product->purchase }}"  style="width: 98%;">
-                                    @error('purchase')
+                                    <input id="purchase" type="number" class="form-control @error('purchases') is-invalid @enderror" name="purchase" placeholder="Purchase Price" value="{{ $product->purchase }}"  style="width: 98%;">
+                                    @error('purchases')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

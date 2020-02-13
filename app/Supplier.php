@@ -8,4 +8,8 @@ class Supplier extends Model
 {
     protected $guarded = ['id'];
 
+    public function relPurchases()
+    {
+        return $this->hasMany('App\Purchases','supplier','id');
+    }
 }

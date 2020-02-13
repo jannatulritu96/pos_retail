@@ -5,7 +5,7 @@
         <ul id="sidebarnav">
             <li class="sidebar-item">
                 <h4 class="sidebar-link  waves-effect waves-dark profile-dd text-center">
-{{--                    <img src="{{ asset('assets/assets/images/users/1.jpg') }}" class="rounded-circle ml-2" width="30">--}}
+                    {{--                    <img src="{{ asset('assets/assets/images/users/1.jpg') }}" class="rounded-circle ml-2" width="30">--}}
                     <span>{{ Auth::user()->name }}</span>
                 </h4>
             </li>
@@ -24,12 +24,18 @@
                 </a>
                 <ul aria-expanded="false" class="collapse first-level">
                     <li class="sidebar-item">
-                        <a href="{{ route('purchase.index') }}" class="sidebar-link">
+                        <a href="{{ route('purchases.index') }}" class="sidebar-link">
                             <i class="mdi mdi-cart"></i>
                             <span class="hide-menu">Purchase</span>
                         </a>
                     </li>
 
+                    <li class="sidebar-item">
+                        <a href="{{ route('stock_in.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Stock In (Receive)</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="sidebar-item">

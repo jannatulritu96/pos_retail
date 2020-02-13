@@ -12,4 +12,8 @@ class Outlet extends Model
     {
         return $this->hasMany('App\Expense','outlet','id');
     }
+    public function relPurchases()
+    {
+        return $this->hasMany('App\Purchases','outlet','id');
+    }
 }
