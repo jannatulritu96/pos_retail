@@ -68,20 +68,22 @@ class ExpenseController extends Controller
 //        dd($request->all());
         $request->validate([
             'outlet'=>'required',
-            'expense_no'=>'required',
             'expense_date'=>'required',
             'note'=>'required',
             'exp_cat'=>'required',
             'amount'=>'required',
         ]);
 
-        $expense = new Expense();
-        $expense->outlet= $request->outlet;
-        $expense->expense_no= $request->expense_no;
-        $expense->expense_date= $request->expense_date;
-        $expense->note= $request->note;
-        $expense->exp_cat= $request->exp_cat;
-        $expense->amount= $request->amount;
+        $expenseNo = Expense::expenseNo($request->outlet);
+
+        $expense = Expense::create([
+            'outlet' => $request->outlet,
+            'expense_no' => $expenseNo,
+            'expense_date' => $request->expense_date,
+            'note' => $request->note,
+            'exp_cat' => $request->exp_cat,
+            'amount' => $request->amount,
+        ]);
 
         if($request->hasFile('file'))
         {

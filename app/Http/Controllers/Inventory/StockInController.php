@@ -30,6 +30,7 @@ class StockInController extends Controller
      */
     public function create()
     {
+        // $rendom = uniqid();
         $outlets = Outlet::where('status','1')->get();
         $suppliers = Supplier::where('status','1')->get();
         $products = Product::where('status','1')->get();
@@ -44,14 +45,13 @@ class StockInController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'outlet'=>'required',
             'supplier'=>'required',
-            'receive_no'=>'required',
             'receive_date'=>'required',
             'challan_no'=>'required',
             'challan_date'=>'required',
-            'challan_doc'=>'required',
             'receive_note'=>'required',
             'product'=>'required',
             'rcv_qty'=>'required',
@@ -65,15 +65,15 @@ class StockInController extends Controller
             'paid_amount'=>'required',
             'due_amount'=>'required',
         ]);
-
+        
+        $receiveNo = Stock_in::receiveNo($request->outlet);
         $stocks = Stock_in::create([
             'outlet' => $request->outlet,
             'supplier' => $request->supplier,
-            'receive_no' => $request->receive_no,
+            'receive_no' => $receiveNo,
             'receive_date' => $request->receive_date,
             'challan_no' => $request->challan_no,
             'challan_date' => $request->challan_date,
-            'challan_doc' => $request->challan_doc,
             'receive_note' => $request->receive_note,
             'product' => $request->product,
             'rcv_qty' => $request->rcv_qty,
@@ -87,6 +87,15 @@ class StockInController extends Controller
             'paid_amount' => $request->paid_amount,
             'due_amount' => $request->due_amount,
         ]);
+
+        if($request->hasFile('challan_doc'))
+            {
+                $file= $request->file('challan_doc');
+                $file->move('assets/stock_file/',$file->getClientOriginalName());
+                $stocks->challan_doc = 'assets/stock_file/'.$file->getClientOriginalName();
+            }
+            $stocks->save();
+
 
         if ($stocks) {
             session()->flash('success','Product stock successfully');

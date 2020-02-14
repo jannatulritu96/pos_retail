@@ -74,7 +74,7 @@
                                     <div class="form-group col-md-3">
                                         <label for="stock_in_date">Receive date<span
                                                 style="color: red">*</span></label>
-                                        <input id="receive_date" type="date" class="form-control @error('receive_date') is-invalid @enderror" name="receive_date" readonly>
+                                        <input id="receive_date" type="date" class="form-control @error('receive_date') is-invalid @enderror" name="receive_date" readonly value="{{ date('Y-m-d') }}">
                                         @error('receive_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -118,7 +118,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="receive_note">Receive note</label>
-                                <textarea id="receive_note" type="text" rows="3" class="form-control  @error('receive_note') is-invalid @enderror" name="receive_note"  placeholder="Receive note" value="{{ old('receive_note') }}" style="width: 98%;"></textarea>
+                                <textarea type="text" rows="3" class="form-control  @error('receive_note') is-invalid @enderror" name="receive_note"  id="receive_note" placeholder="Receive note" value="{{ old('receive_note') }}" style="width: 98%;"></textarea>
                                 @error('receive_note')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -134,7 +134,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="product">Product</label>
-                                        <select class="form-control select2" style="width: 100%;" name="product" id="product0"  onchange="setUnitPrice(0)">
+                                        <select class="form-control select2" style="width: 100%;" name="product" id="product0">
                                             <option>Select product</option>
                                             @foreach($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -310,7 +310,8 @@
     </section>
     <script>
         function addRow() {
-            var productDiv = $('#productDiv ').length;
+            var productOptions = $('#product0').html();
+            var productDiv = $('#productDiv .row').length;
 
             var html = `<div class="row" id="productRow`+productDiv+`">`;
             if(productDiv > 0) {
@@ -326,27 +327,27 @@
             }
 
             html += `<div class="form-group col-md-3">
-                    <label for="product">Product</label>
-                    <select class="form-control select2" style="width: 100%;" name="product" id="product`+productDiv+`" onchange="setUnitPrice(`+productDiv+`)">
-                        <option>Select product</option>
-                        <option value=""></option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="note">Receive Quantity</label>
-                    <input type="number" class="form-control" name="rcv_qty" id="rcv_qty`+productDiv+`" placeholder="Receive Quantity" onkeyup="chkPrice(`+productDiv+`)">
-                </div>
-                <div class="form-group  col-md-2">
-                    <label for="unit_price">Unit Price (Tk)</label>
-                    <input type="number" class="form-control" name="unit_price" id="unit_price`+productDiv+`" placeholder="Unit Price (Tk)" onkeyup="chkPrice(`+productDiv+`)">
-                </div>
-                <div class="form-group col-md-3 float-right">
-                    <label for="total_price">Total Price (Tk)</label>
-                    <input type="number" class="form-control" name="total_price" id="total_price`+productDiv+`" placeholder="Total Price (Tk)" readonly>
-                </div>
-            </div>`;
+                        <label for="product">Product</label>
+                        <select class="form-control select2" style="width: 100%;" name="product" id="product`+productDiv+`" onchange="setUnitPrice(`+productDiv+`)">
+                            `+productOptions+`
+                        </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="note">Receive Quantity</label>
+                            <input type="number" class="form-control" name="rcv_qty" id="rcv_qty`+productDiv+`" placeholder="Receive Quantity" onkeyup="chkPrice(`+productDiv+`)">
+                        </div>
+                        <div class="form-group  col-md-2">
+                            <label for="unit_price">Unit Price (Tk)</label>
+                            <input type="number" class="form-control" name="unit_price" id="unit_price`+productDiv+`" placeholder="Unit Price (Tk)" onkeyup="chkPrice(`+productDiv+`)">
+                        </div>
+                        <div class="form-group col-md-3 float-right">
+                            <label for="total_price">Total Price (Tk)</label>
+                            <input type="number" class="form-control" name="total_price" id="total_price`+productDiv+`" placeholder="Total Price (Tk)" readonly>
+                        </div>
+                    </div>`;
 
-            $('#productDiv ').append(html);
+            $('#productDiv').append(html);
+            $('#product'+productDiv).val('');
         }
 
         function removeRow(productDiv) {

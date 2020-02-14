@@ -23,7 +23,7 @@ class CreateStockInsTable extends Migration
             $table->string('receive_date');
             $table->string('challan_no');
             $table->string('challan_date');
-            $table->string('challan_doc');
+            $table->string('challan_doc')->nullable();
             $table->string('receive_note');
             $table->string('product');
             $table->string('rcv_qty');
@@ -32,7 +32,7 @@ class CreateStockInsTable extends Migration
             $table->string('total_qty');
             $table->string('total_amount');
             $table->string('tax');
-            $table->string('discount_amount');
+            $table->string('discount_amount')->nullable();
             $table->string('payable_amount');
             $table->string('paid_amount');
             $table->string('due_amount');

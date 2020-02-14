@@ -17,7 +17,7 @@ class CreateExpensesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('outlet');
             $table->foreign('outlet')->references('id')->on('outlets');
-            $table->string('file');
+            $table->string('file')->nullabe();
             $table->string('expense_no');
             $table->string('expense_date');
             $table->string('note');

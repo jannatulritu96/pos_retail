@@ -56,7 +56,7 @@
                                 <div class="box-body">
                                     <div class="form-group" style="margin-left: 5px;">
                                         <label for="expense_no">Expense no.</label>
-                                        <input id="expense_no" type="text" class="form-control @error('expense_no') is-invalid @enderror" name="expense_no" placeholder="Expense no" value="{{ old('expense_no') }}"  style="width: 98%;">
+                                        <input id="expense_no" type="text" class="form-control @error('expense_no') is-invalid @enderror" name="expense_no" placeholder="Auto generated" value="{{ old('expense_no') }}"  style="width: 98%;" value="" readonly>
                                         @error('expense_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
