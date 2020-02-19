@@ -48,13 +48,12 @@
                                     <div class="form-group col-md-3">
                                         <label for="supplier">Supplier<span
                                                 style="color: red">*</span></label>
-                                        <select class="form-control select2" style="width: 90%;" name="supplier" required>
+                                        <select class="form-control select2" style="width: 90%;" name="supplier">
                                             <option>Select supplier</option>
                                             @foreach($suppliers as $supplier)
-                                                <option value="{{$supplier->id}}">{{ $supplier->name }}</option>
+                                                <option value="{{$supplier->id}}" required>{{ $supplier->name }}</option>
                                             @endforeach
                                         </select>
-                                        <a class="input-group-addon" href="#" data-toggle="modal" data-target="#myModal"><i class="fas fa-save"  style="float: right;font-size: 28px;margin-right: 11px;"></i></a>
                                         @error('outlet')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -134,7 +133,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="product">Product</label>
-                                        <select class="form-control select2" style="width: 100%;" name="product" id="product0">
+                                        <select class="form-control select2" style="width: 100%;" name="product[0][product]" id="product0">
                                             <option>Select product</option>
                                             @foreach($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -148,7 +147,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="note">Receive Quantity</label>
-                                        <input type="number" class="form-control  @error('rcv_qty') is-invalid @enderror" name="rcv_qty" id="rcv_qty0" placeholder="Receive Quantity" onkeyup="chkPrice(0)">
+                                        <input type="number" class="form-control  @error('rcv_qty') is-invalid @enderror" name="product[0][rcv_qty]" id="rcv_qty0" placeholder="Receive Quantity" onkeyup="chkPrice(0)">
                                         @error('rcv_qty')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -157,7 +156,7 @@
                                     </div>
                                     <div class="form-group  col-md-2">
                                         <label for="unit_price">Unit Price (Tk)</label>
-                                        <input type="number" class="form-control  @error('unit_price') is-invalid @enderror" name="unit_price" id="unit_price0" placeholder="Unit Price (Tk)" onkeyup="chkPrice(0)">
+                                        <input type="number" class="form-control  @error('unit_price') is-invalid @enderror" name="product[0][unit_price]" id="unit_price0" placeholder="Unit Price (Tk)" onkeyup="chkPrice(0)">
                                         @error('unit_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -166,7 +165,7 @@
                                     </div>
                                     <div class="form-group col-md-3 float-right">
                                         <label for="total_price">Total Price (Tk)</label>
-                                        <input type="number" class="form-control  @error('total_price') is-invalid @enderror" name="total_price" id="total_price0" placeholder="Total Price (Tk)" readonly>
+                                        <input type="number" class="form-control  @error('total_price') is-invalid @enderror" name="product[0][total_price]" id="total_price0" placeholder="Total Price (Tk)" readonly>
                                         @error('total_price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -219,11 +218,6 @@
                                         <div class="form-group">
                                             <label for="discount_amount">Discount Amount(Tk)</label>
                                             <input type="number" class="form-control  @error('discount_amount') is-invalid @enderror" name="discount_amount" id="discount_amount" placeholder="Discount Amount(Tk)" onkeyup="totalCal()">
-                                            @error('discount_amount')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="payable_amount">Payable Amount(Tk)</label>
@@ -309,6 +303,7 @@
         </div>
     </section>
     <script>
+        var i = 1;
         function addRow() {
             var productOptions = $('#product0').html();
             var productDiv = $('#productDiv .row').length;
@@ -328,25 +323,26 @@
 
             html += `<div class="form-group col-md-3">
                         <label for="product">Product</label>
-                        <select class="form-control select2" style="width: 100%;" name="product" id="product`+productDiv+`" onchange="setUnitPrice(`+productDiv+`)">
+                        <select class="form-control select2" style="width: 100%;" name="product[`+ i +`][product]" id="product`+productDiv+`" onchange="setUnitPrice(`+productDiv+`)">
                             `+productOptions+`
                         </select>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="note">Receive Quantity</label>
-                            <input type="number" class="form-control" name="rcv_qty" id="rcv_qty`+productDiv+`" placeholder="Receive Quantity" onkeyup="chkPrice(`+productDiv+`)">
+                            <input type="number" class="form-control" name="product[`+ i +`][rcv_qty]" id="rcv_qty`+productDiv+`" placeholder="Receive Quantity" onkeyup="chkPrice(`+productDiv+`)">
                         </div>
                         <div class="form-group  col-md-2">
                             <label for="unit_price">Unit Price (Tk)</label>
-                            <input type="number" class="form-control" name="unit_price" id="unit_price`+productDiv+`" placeholder="Unit Price (Tk)" onkeyup="chkPrice(`+productDiv+`)">
+                            <input type="number" class="form-control" name="product[`+ i +`][unit_price]" id="unit_price`+productDiv+`" placeholder="Unit Price (Tk)" onkeyup="chkPrice(`+productDiv+`)">
                         </div>
                         <div class="form-group col-md-3 float-right">
                             <label for="total_price">Total Price (Tk)</label>
-                            <input type="number" class="form-control" name="total_price" id="total_price`+productDiv+`" placeholder="Total Price (Tk)" readonly>
+                            <input type="number" class="form-control" name="product[`+ i +`][total_price]" id="total_price`+productDiv+`" placeholder="Total Price (Tk)" readonly>
                         </div>
                     </div>`;
 
             $('#productDiv').append(html);
+            i++;
             $('#product'+productDiv).val('');
         }
 
@@ -370,7 +366,7 @@
                 rcv_qty += +$(this).val();
             });
             $('#total_qty').val(rcv_qty.toFixed(2));
-            
+
             var total_price = 0;
             $("input[id^= 'total_price']").each(function(){
                 total_price += +$(this).val();

@@ -55,11 +55,19 @@ Route::group(['prefix' => 'expenses'], function (){
     Route::post('/expense/change-activity/{id}', 'Expense\ExpenseController@changeActivity')->name('expense.change-activity');
     Route::get('/search-report', 'Expense\ExpenseController@searchReport')->name('expense.search-report');
 });
-Route::group(['prefix' => 'inventory '], function (){
+Route::group(['prefix' => 'inventory'], function (){
     //Purchase  route
     Route::resource('purchases', 'Inventory\PurchasesController');
     Route::post('/purchases/change-activity/{id}', 'Inventory\PurchasesController@changeActivity')->name('purchases.change-activity');
-    //Purchase  route
+    //stock_in  route
     Route::resource('stock_in', 'Inventory\StockInController');
     Route::post('/stock_in/change-activity/{id}', 'Inventory\StockInController@changeActivity')->name('stock-in.change-activity');
+    //stock_return  route
+    Route::get('stock_return','Inventory\StockReturnController@index')->name('stock_return.index');
+    Route::get('stock_return/create/{id}','Inventory\StockReturnController@create')->name('stock_return.create');
+    Route::POST('stock_return/store/{id}','Inventory\StockReturnController@store')->name('stock_return.store');
+    Route::get('stock_return/show/{id}','Inventory\StockReturnController@show')->name('stock_return.show');
+    Route::get('stock_return/edit/{id}','Inventory\StockReturnController@edit')->name('stock_return.edit');
+    Route::POST('stock_return/update/{id}','Inventory\StockReturnController@update')->name('stock_return.update');
+    Route::POST('stock_return/destroy/{id}','Inventory\StockReturnController@destroy')->name('stock_return.destroy');
 });

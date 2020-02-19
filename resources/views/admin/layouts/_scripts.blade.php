@@ -1,6 +1,4 @@
 <!-- All Jquery -->
-<!-- ============================================================== -->
-<script src="{{ asset('assets/assets/libs/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap tether Core JavaScript -->
 <script src="{{ asset('assets/assets/libs/popper.js/dist/umd/popper.min.js') }}"></script>
 <script src="{{ asset('assets/assets/libs/bootstrap/dist/js/bootstrap.min.js') }}"></script>

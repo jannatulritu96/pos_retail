@@ -85,7 +85,7 @@ class ProductController extends Controller
             $product->name= $request->name;
             $product->code= $request->code;
             $product->unit= $request->unit;
-            $product->purchase= $request->purchase;
+            $product->purchases= $request->purchases;
             $product->sell= $request->sell;
             $product->details= $request->details;
             if($request->hasFile('image'))
@@ -144,7 +144,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->code = $request->code;
         $product->unit = $request->unit;
-        $product->purchase = $request->purchase;
+        $product->purchases = $request->purchases;
         $product->sell = $request->sell;
         $product->details = $request->details;
         if($request->hasFile('image'))

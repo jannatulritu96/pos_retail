@@ -99,7 +99,7 @@
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $product->code }}</td>
                                                 <td>{{ $product->relUnit->unit }}</td>
-                                                <td class="text-right">{{ $product->purchase }}/-</td>
+                                                <td class="text-right">{{ $product->purchases }}/-</td>
                                                 <td class="text-right">{{ $product->sell }}/-</td>
                                                 <td class="text-center">
                                                     @if($product->status == 1)

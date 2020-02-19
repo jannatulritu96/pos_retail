@@ -25,10 +25,6 @@ class CreateStockInsTable extends Migration
             $table->string('challan_date');
             $table->string('challan_doc')->nullable();
             $table->string('receive_note');
-            $table->string('product');
-            $table->string('rcv_qty');
-            $table->string('unit_price');
-            $table->string('total_price');
             $table->string('total_qty');
             $table->string('total_amount');
             $table->string('tax');

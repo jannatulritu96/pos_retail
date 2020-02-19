@@ -130,7 +130,7 @@
                                                            <li><a class="dropdown-item" href="{{ route('stock_in.show',$stock->id) }}"><i class="fa fa-eye"></i> Show row</a></li>
                                                            <li><a class="dropdown-item" href="" onclick="updateStatus({{ $stock->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
                                                            <li><div role="separator" class="dropdown-divider"></div></li>
-                                                           <li><a class="btn btn-danger" data-toggle="tooltip" title="Return to Suppliper" href="{{ route('stock_return.create',$stock->id) }}" style="margin-left: 18px"><i class="fa fa-minus"></i> Return</a>
+                                                           <li><a class="btn btn-danger" data-toggle="tooltip" title="Return to Suppliper" href="{{ route('stock_in.edit',$stock->id) }}" style="margin-left: 18px"><i class="fa fa-minus"></i> Return</a>
                                                        </ul>
                                                    </div>
                                                </td>

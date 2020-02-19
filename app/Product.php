@@ -20,4 +20,8 @@ class Product extends Model
     {
         return $this->hasOne('App\Purchases','product','id');
     }
+    public function relStockItem()
+    {
+        return $this->belongsTo('App\StockItem','product','id');
+    }
 }

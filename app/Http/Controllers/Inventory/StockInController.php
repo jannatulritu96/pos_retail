@@ -4,10 +4,15 @@ namespace App\Http\Controllers\Inventory;
 
 use App\Outlet;
 use App\Product;
-use App\Stock_in;
+use App\ReturnQuantity;
+use App\StockItem;
+use App\StockReturn;
+use App\StockIn;
 use App\Supplier;
+use App\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use function foo\func;
 
 class StockInController extends Controller
 {
@@ -18,9 +23,15 @@ class StockInController extends Controller
      */
     public function index()
     {
-        $data = Stock_in::select('*');
-//        $render = [];
-        return view('admin.inventory.stock_in.index',compact('data'));
+        $sql = StockIn::with(['relOutlet','relProduct','relSupplier'])->select('*');
+        $products = Product::where('status','1')->get();
+        $suppliers = Supplier::where('status','1')->get();
+        $outlets = Outlet::where('status','1')->get();
+        $render = [];
+
+        $data = $sql->paginate(30);
+        $data->appends($render);
+        return view('admin.inventory.stock_in.index',compact('data','products','outlets','status','suppliers'));
     }
 
     /**
@@ -45,7 +56,7 @@ class StockInController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+//        dd($request->all());
         $request->validate([
             'outlet'=>'required',
             'supplier'=>'required',
@@ -54,20 +65,15 @@ class StockInController extends Controller
             'challan_date'=>'required',
             'receive_note'=>'required',
             'product'=>'required',
-            'rcv_qty'=>'required',
-            'unit_price'=>'required',
-            'total_price'=>'required',
             'total_qty'=>'required',
             'total_amount'=>'required',
             'tax'=>'required',
-            'discount_amount'=>'required',
             'payable_amount'=>'required',
             'paid_amount'=>'required',
             'due_amount'=>'required',
         ]);
-        
-        $receiveNo = Stock_in::receiveNo($request->outlet);
-        $stocks = Stock_in::create([
+        $receiveNo = StockIn::receiveNo($request->outlet);
+        $stockIn = StockIn::create([
             'outlet' => $request->outlet,
             'supplier' => $request->supplier,
             'receive_no' => $receiveNo,
@@ -75,10 +81,6 @@ class StockInController extends Controller
             'challan_no' => $request->challan_no,
             'challan_date' => $request->challan_date,
             'receive_note' => $request->receive_note,
-            'product' => $request->product,
-            'rcv_qty' => $request->rcv_qty,
-            'unit_price' => $request->unit_price,
-            'total_price' => $request->total_price,
             'total_qty' => $request->total_qty,
             'total_amount' => $request->total_amount,
             'tax' => $request->tax,
@@ -88,16 +90,30 @@ class StockInController extends Controller
             'due_amount' => $request->due_amount,
         ]);
 
+
+                foreach ($request->product as $key => $product) {
+                    if (isset($product)) {
+                        $stockItem = new StockItem();
+                        $stockItem->stock_in_id = $stockIn->id;
+                        $stockItem->product = $product['product'];
+                        $stockItem->rcv_qty = $product['rcv_qty'];
+                        $stockItem->unit_price = $product['unit_price'];
+                        $stockItem->total_price = $product['total_price'];
+                        $stockItem->save();
+                    }
+                }
+
+
         if($request->hasFile('challan_doc'))
             {
                 $file= $request->file('challan_doc');
                 $file->move('assets/stock_file/',$file->getClientOriginalName());
-                $stocks->challan_doc = 'assets/stock_file/'.$file->getClientOriginalName();
+                $stockIn->challan_doc = 'assets/stock_file/'.$file->getClientOriginalName();
             }
-            $stocks->save();
+        $stockIn->save();
 
 
-        if ($stocks) {
+        if ($stockIn) {
             session()->flash('success','Product stock successfully');
         } else {
             session()->flash('error','Something was wrong!  ');
@@ -113,7 +129,13 @@ class StockInController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = StockIn::with(['relOutlet','relSupplier','relStockItem' => function($q){
+            $q->with(['relProduct','relUnit']);
+        }])->find($id);
+
+//        $units = Unit::where('status','1')->get();
+
+        return view('admin.inventory.stock_in.show',compact('data','units'));
     }
 
     /**
@@ -124,7 +146,7 @@ class StockInController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -136,7 +158,7 @@ class StockInController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -147,6 +169,34 @@ class StockInController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $delete = StockIn::findOrFail($id)->delete();
+
+        if ($delete == 1) {
+            $success = true;
+            $message = "Stock deleted successfully";
+        } else {
+            $success = true;
+            $message = "Stock not found";
+        }
+
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+    public function changeActivity($id)
+    {
+        $stocks = StockIn::find($id);
+        $status = 0;
+        if ($stocks->status == 0) {
+            $status = 1;
+        }
+        $stocks = $stocks->update(['status' => $status]);
+
+        if ($stocks) {
+            return response()->json(['success' => true, 'Status updated Successfully', 'status' => 200], 200);
+        } else {
+            return response()->json(['success' => false, 'Whoops! Status not updated', 'status' => 401], 200);
+        }
     }
 }

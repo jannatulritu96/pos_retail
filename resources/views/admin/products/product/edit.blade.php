@@ -83,7 +83,7 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="purchase">Purchase Price (Tk)<span
                                             style="color: red">*</span></label>
-                                    <input id="purchase" type="number" class="form-control @error('purchases') is-invalid @enderror" name="purchase" placeholder="Purchase Price" value="{{ $product->purchase }}"  style="width: 98%;">
+                                    <input id="purchase" type="number" class="form-control @error('purchases') is-invalid @enderror" name="purchases" placeholder="Purchase Price" value="{{ $product->purchases }}"  style="width: 98%;">
                                     @error('purchases')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -112,7 +112,7 @@
                                 <div class="form-group" style="margin-left: 5px;">
                                     <label for="image">Image</label><br>
                                     <img id="image" style="width:30%;margin-bottom: 8px;margin-left: -6px;margin-top: 8px;" src="{{ asset($product->image) }}"><br>
-                                    <input name="image" type="file" accept="image/*"  required onchange="readURL(this);">
+                                    <input name="image" type="file" accept="image/*"  onchange="readURL(this);">
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
