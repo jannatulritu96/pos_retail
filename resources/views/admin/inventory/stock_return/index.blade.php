@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Purchase list</li>
+                        <li class="breadcrumb-item active" aria-current="page">Return to Supplier list</li>
                     </ol>
                 </nav>
             </div>
@@ -27,10 +27,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Purchase list</h4>
-                            </div>
-                            <div class="col-md-6">
-                                <a href="{{ route('stock_in.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Add New Stock In (Receive)</a>
+                                <h4 class="card-title">Return to Supplier List</h4>
                             </div>
                         </div>
                     </div>
@@ -44,20 +41,16 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6">
-{{--                                    <form method="get" class="form-horizontal" action="{{route('stock_in.index')}}" >--}}
+{{--                                    <form method="get" class="form-horizontal" action="{{route('stock_return.index')}}" >--}}
 
 {{--                                        <div class="dataTables_filter">--}}
 {{--                                            <button type="submit" class="btn btn-primary" style="float: right;margin-left: 5px;padding: 2.1px 12px;">Search</button>--}}
 {{--                                        </div>--}}
-{{--                                        <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;">--}}
-{{--                                            <select class="form-control form-control-sm" name="status">--}}
-{{--                                                <option value="">Select Status</option>--}}
-{{--                                                <option value="1" @if($status == '1') selected @endif>Active</option>--}}
-{{--                                                <option value="0" @if($status == '0') selected @endif>Inactive</option>--}}
-{{--                                            </select>--}}
-{{--                                        </div>--}}
-
 {{--                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">--}}
+{{--                                            <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"--}}
+{{--                                                   value="{{Request::get('stock_in')}}" onchange="search_post()">--}}
+{{--                                        </div>--}}
+{{--                                        <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;margin-right: 5px">--}}
 {{--                                            <select class="form-control form-control-sm" name="supplier" id="supplier">--}}
 {{--                                                <option value="">All supplier</option>--}}
 {{--                                                @foreach($suppliers as $supplier)--}}
@@ -66,7 +59,7 @@
 {{--                                            </select>--}}
 {{--                                        </div>--}}
 
-{{--                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">--}}
+{{--                                        <div id="default_order_filter" class="dataTables_filter  mb-2" style="float: right;margin-right: 5px">--}}
 {{--                                            <select class="form-control form-control-sm" name="outlet" id="outlet">--}}
 {{--                                                <option value="">All outlet</option>--}}
 {{--                                                @foreach($outlets as $outlet)--}}
@@ -86,39 +79,30 @@
                                                 <th>Sl</th>
                                                 <th>Outlet</th>
                                                 <th>Supplier</th>
-                                                <th class="text-center">Receive No.	</th>
+                                                <th class="text-center">Return No.</th>
+                                                <th class="text-center">Return Date</th>
+                                                <th class="text-center">Receive No.</th>
                                                 <th class="text-center">Receive Date</th>
                                                 <th class="text-center">Challan No.</th>
                                                 <th class="text-center">Challan Date</th>
-                                                <th class="text-center">Qty</th>
-                                                <th class="text-center">Amount (Tk)	</th>
-                                                <th class="text-center">Due Amount (Tk)	</th>
-{{--                                                <th class="text-center">Sale/Rtn. Qty</th>--}}
-                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Return Qty</th>
                                                 <th class="text-right">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                       @foreach($data as $stock)
+                                       @foreach($data as $return)
+{{--                                           {{ dd($data) }}--}}
                                            <tr>
-                                               <td>{{ $stock->id }}</td>
-                                               <td>{{ $stock->relOutlet->name }}</td>
-                                               <td>{{ $stock->relSupplier->name }}</td>
-                                               <td class="text-center">{{ $stock->receive_no }}</td>
-                                               <td class="text-center">{{ $stock->receive_date }}</td>
-                                               <td class="text-center">{{ $stock->challan_no }}</td>
-                                               <td class="text-center">{{ $stock->challan_date }}</td>
-                                               <td class="text-center">{{ $stock->rcv_qty }}</td>
-                                               <td class="text-center">{{ $stock->total_amount }}</td>
-                                               <td class="text-center">{{ $stock->due_amount }}</td>
-                                               <td class="text-center"></td>
-                                               <td class="text-center">
-                                                   @if($stock->status == 1)
-                                                       <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
-                                                   @else($stock->status == 0)
-                                                       <span style="font-size: 16px;" class="badge badge-pill badge-danger">Inactive</span>
-                                                   @endif
-                                               </td>
+                                               <td>{{ $return->id }}</td>
+                                               <td>{{ $return->relStockReturn->relStockIn->relOutlet->name }}</td>
+                                               <td>{{ $return->relStockReturn->relStockIn->relSupplier->name }}</td>
+                                               <td class="text-center">{{ $return->relStockReturn->return_no }}</td>
+                                               <td class="text-center">{{ $return->relStockReturn->return_date }}</td>
+                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->receive_no }}</td>
+                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->receive_date }}</td>
+                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->challan_no }}</td>
+                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->challan_date }}</td>
+                                               <td class="text-center">{{ $return->returning_qty }}</td>
                                                <td class="text-right">
                                                    <div class="btn-group">
                                                        <button type="button" class="btn btn-default">Action</button>
@@ -127,10 +111,14 @@
                                                            <span class="sr-only">Toggle Dropdown</span>
                                                        </button>
                                                        <ul class="dropdown-menu pull-right" role="menu">
-                                                           <li><a class="dropdown-item" href="{{ route('stock_in.show',$stock->id) }}"><i class="fa fa-eye"></i> Show row</a></li>
-                                                           <li><a class="dropdown-item" href="" onclick="updateStatus({{ $stock->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
-                                                           <li><div role="separator" class="dropdown-divider"></div></li>
-                                                           <li><a class="btn btn-danger" data-toggle="tooltip" title="Return to Suppliper" href="{{ route('stock_in.edit',$stock->id) }}" style="margin-left: 18px"><i class="fa fa-minus"></i> Return</a>
+                                                           <li><a class="dropdown-item" href="{{ route('stock_return.show',$return->id) }}"><i class="fa fa-eye"></i> Show row</a></li>
+                                                           <li><a class="dropdown-item" href="{{ route('stock_return.edit',$return->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                           <li>
+                                                               <div role="separator" class="dropdown-divider"></div>
+                                                           </li>
+                                                           <li>
+                                                               <a type="button"  onclick="deleteconfirm('{{ $return->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
+                                                           </li>
                                                        </ul>
                                                    </div>
                                                </td>
@@ -151,23 +139,6 @@
 @endsection
 @section('script')
     <script>
-        function updateStatus(id) {
-            let data = {
-                _token: '{{ csrf_token() }}'
-            };
-            $.ajax({
-                type: 'post',
-                url: 'stock_in/change-activity/'+ id,
-                cache: false,
-                data: data,
-                success: function (results) {
-                    if (results.success === true) {
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-
         function deleteconfirm(id) {
             swal({
                 title: "Delete?",
@@ -180,8 +151,8 @@
             }).then(function (e) {
                 if (e.value === true) {
                     $.ajax({
-                        type: 'DELETE',
-                        url: "purchases/" + id,
+                        type: 'POST',
+                        url: "stock_return/destroy/" + id,
                         data: {_token: '{{  @csrf_token() }}' },
                         dataType: 'JSON',
                         success: function (results) {
@@ -204,10 +175,6 @@
             }, function (dismiss) {
                 return false;
             })
-        }
-
-        function search_post() {
-            $('#search').click()
         }
     </script>
 @endsection

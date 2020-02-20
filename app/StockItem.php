@@ -14,7 +14,7 @@ class StockItem extends Model
     }
     public function relStockIn()
     {
-        return $this->belongsTo('App\StockIn');
+        return $this->belongsTo('App\StockIn','stock_in_id','id');
     }
     public function relProduct()
     {
@@ -22,6 +22,6 @@ class StockItem extends Model
     }
     public function relReturnQuantity()
     {
-        return $this->hasMany('App\ReturnQuantity','product','id');
+        return $this->hasMany('App\ReturnQuantity');
     }
 }

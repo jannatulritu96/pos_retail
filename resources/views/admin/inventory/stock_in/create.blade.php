@@ -11,8 +11,8 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="{{ route('stock_in.index') }}">Expense list</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Expense create</li>
+                        <li class="breadcrumb-item active"><a href="{{ route('stock_in.index') }}">Stock In (Receive) list</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Stock In (Receive) create</li>
                     </ol>
                 </nav>
             </div>

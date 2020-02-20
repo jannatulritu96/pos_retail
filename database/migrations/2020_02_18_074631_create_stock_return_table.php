@@ -17,6 +17,8 @@ class CreateStockReturnTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('stock_in_id');
             $table->foreign('stock_in_id')->references('id')->on('stock_ins');
+            $table->unsignedBigInteger('outlet');
+            $table->foreign('outlet')->references('id')->on('outlets');
             $table->string('return_no');
             $table->date('return_date');
             $table->string('return_causes');

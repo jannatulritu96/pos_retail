@@ -12,7 +12,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Purchase list</li>
+                        <li class="breadcrumb-item active" aria-current="page">Stock In (Receive) list</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +27,7 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Purchase list</h4>
+                                <h4 class="card-title">Stock In (Receive) list</h4>
                             </div>
                             <div class="col-md-6">
                                 <a href="{{ route('stock_in.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Add New Stock In (Receive)</a>
@@ -95,11 +95,12 @@
                                                 <th class="text-center">Due Amount (Tk)	</th>
 {{--                                                <th class="text-center">Sale/Rtn. Qty</th>--}}
                                                 <th class="text-center">Status</th>
-                                                <th class="text-right">Action</th>
+                                                <th class="text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                        @foreach($data as $stock)
+{{--                                           {{ dd($data) }}--}}
                                            <tr>
                                                <td>{{ $stock->id }}</td>
                                                <td>{{ $stock->relOutlet->name }}</td>
@@ -108,10 +109,9 @@
                                                <td class="text-center">{{ $stock->receive_date }}</td>
                                                <td class="text-center">{{ $stock->challan_no }}</td>
                                                <td class="text-center">{{ $stock->challan_date }}</td>
-                                               <td class="text-center">{{ $stock->rcv_qty }}</td>
+                                               <td class="text-center">{{ $stock->total_qty }}</td>
                                                <td class="text-center">{{ $stock->total_amount }}</td>
                                                <td class="text-center">{{ $stock->due_amount }}</td>
-                                               <td class="text-center"></td>
                                                <td class="text-center">
                                                    @if($stock->status == 1)
                                                        <span style="font-size: 16px;" class="badge badge-pill badge-success">Active</span>
@@ -128,7 +128,12 @@
                                                        </button>
                                                        <ul class="dropdown-menu pull-right" role="menu">
                                                            <li><a class="dropdown-item" href="{{ route('stock_in.show',$stock->id) }}"><i class="fa fa-eye"></i> Show row</a></li>
+                                                           <li><a class="dropdown-item" href="{{ route('stock_in.edit',$stock->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
                                                            <li><a class="dropdown-item" href="" onclick="updateStatus({{ $stock->id }})"><i class="fa fa-fw fa-search-plus"></i> Status</a></li>
+                                                           <li><div role="separator" class="dropdown-divider"></div></li>
+                                                           <li>
+                                                               <a type="button"  onclick="deleteconfirm('{{ $stock->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
+                                                           </li>
                                                            <li><div role="separator" class="dropdown-divider"></div></li>
                                                            <li><a class="btn btn-danger" data-toggle="tooltip" title="Return to Suppliper" href="{{ route('stock_return.create',$stock->id) }}" style="margin-left: 18px"><i class="fa fa-minus"></i> Return</a>
                                                        </ul>
@@ -151,23 +156,6 @@
 @endsection
 @section('script')
     <script>
-        function updateStatus(id) {
-            let data = {
-                _token: '{{ csrf_token() }}'
-            };
-            $.ajax({
-                type: 'post',
-                url: 'stock_in/change-activity/'+ id,
-                cache: false,
-                data: data,
-                success: function (results) {
-                    if (results.success === true) {
-                        window.location.reload();
-                    }
-                }
-            });
-        }
-
         function deleteconfirm(id) {
             swal({
                 title: "Delete?",
@@ -181,7 +169,7 @@
                 if (e.value === true) {
                     $.ajax({
                         type: 'DELETE',
-                        url: "purchases/" + id,
+                        url: "stock_in/" + id,
                         data: {_token: '{{  @csrf_token() }}' },
                         dataType: 'JSON',
                         success: function (results) {
@@ -204,10 +192,6 @@
             }, function (dismiss) {
                 return false;
             })
-        }
-
-        function search_post() {
-            $('#search').click()
         }
     </script>
 @endsection

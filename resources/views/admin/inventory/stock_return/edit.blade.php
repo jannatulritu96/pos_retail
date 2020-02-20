@@ -12,7 +12,7 @@
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('stock_in.index') }}">Stock list</a></li>
-                        <li class="breadcrumb-item active"><a href="#">Return to Supplier Entry</a></li>
+                        <li class="breadcrumb-item active"><a href="#">Return to Supplier edit</a></li>
                     </ol>
                 </nav>
             </div>
@@ -23,11 +23,11 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Return to Supplier Entry Form</h4>
-                        <form method="GET" class="form-horizontal" action="{{ route('stock_in.edit',$stock) }}"
+                        <h4 class="card-title">Return to Supplier edit Form</h4>
+                        <form method="GET" class="form-horizontal" action="{{ route('stock_return.update',$stock) }}"
                               id="form_stock" enctype="multipart/form-data">
                             @csrf
-                            {{--                            @method('PUT')--}}
+                            @method('PUT')
                             @include('.admin.layouts._messages')
                             <div class="col-md-12">
                                 <div class="row">

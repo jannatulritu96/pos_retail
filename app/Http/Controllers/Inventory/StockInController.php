@@ -133,7 +133,6 @@ class StockInController extends Controller
             $q->with(['relProduct','relUnit']);
         }])->find($id);
 
-//        $units = Unit::where('status','1')->get();
 
         return view('admin.inventory.stock_in.show',compact('data','units'));
     }
@@ -147,6 +146,11 @@ class StockInController extends Controller
     public function edit($id)
     {
 
+        $stockIn = StockIn::with(['relUnit','relProduct','relStockItem'])->find($id);
+        $outlets = Outlet::where('status','1')->get();
+        $suppliers = Supplier::where('status','1')->get();
+        $products = Product::where('status','1')->get();
+        return view('admin.inventory.stock_in.edit',compact('outlets','suppliers','products','stockIn','stockItem'));
     }
 
     /**
@@ -158,7 +162,74 @@ class StockInController extends Controller
      */
     public function update(Request $request, $id)
     {
+//        dd($request->all());
+        $stockIn = StockIn::where(['id'=> $id])->Update([
+            'outlet' => $request->outlet,
+            'supplier' => $request->supplier,
+            'receive_no' => $request->receive_no,
+            'receive_date' => $request->receive_date,
+            'challan_no' => $request->challan_no,
+            'challan_date' => $request->challan_date,
+            'receive_note' => $request->receive_note,
+            'total_qty' => $request->total_qty,
+            'total_amount' => $request->total_amount,
+            'tax' => $request->tax,
+            'discount_amount' => $request->discount_amount,
+            'payable_amount' => $request->payable_amount,
+            'paid_amount' => $request->paid_amount,
+            'due_amount' => $request->due_amount,
+        ]);
 
+//  All delete method
+//        if($request->hasFile('challan_doc'))
+//        {
+//            $file= $request->file('challan_doc');
+//            $file->move('assets/stock_file/',$file->getClientOriginalName());
+//            $stockIn->challan_doc = 'assets/stock_file/'.$file->getClientOriginalName();
+//        }
+//        $stockIn->save();
+//        $stockIn = StockIn::where(['id'=> $id])->first()->relStockItem()->delete();
+//
+//        foreach ($request->product as $key => $product) {
+//            if (isset($product)) {
+//                $stockItem = new StockItem();
+//                $stockItem->stock_in_id = $stockIn->id;
+//                $stockItem->product = $product['product'];
+//                $stockItem->rcv_qty = $product['rcv_qty'];
+//                $stockItem->unit_price = $product['unit_price'];
+//                $stockItem->total_price = $product['total_price'];
+//                $stockItem->save();
+//            }
+//        }
+//
+//
+//        if($request->hasFile('challan_doc'))
+//        {
+//            $file= $request->file('challan_doc');
+//            $file->move('assets/stock_file/',$file->getClientOriginalName());
+//            $stockIn->challan_doc = 'assets/stock_file/'.$file->getClientOriginalName();
+//        }
+//        $stockIn->save();
+        foreach ($request->id as $key => $stock_items_id) {
+            if (isset($stock_items_id)) {
+                StockItem::where(['id' => $stock_items_id])->Update([
+                    'stock_in_id' => $id,
+                    'product' => $request->product[$key],
+                    'rcv_qty' => $request->rcv_qty[$key],
+                    'unit_price' => $request->unit_price[$key],
+                    'total_price' => $request->total_price[$key],
+                ]);
+
+            }
+        }
+
+
+        if ($stockIn) {
+            session()->flash('success','Product stock successfully');
+        } else {
+            session()->flash('error','Something was wrong!  ');
+        }
+        return redirect()->route('stock_in.index');
     }
 
     /**

@@ -32,7 +32,7 @@ class StockReturn extends Model
     }
     public function relReturnQuantity()
     {
-        return $this->belongsTo('App\ReturnQuantity');
+        return $this->hasMany('App\ReturnQuantity');
     }
     public static function returnNo($outletId)
     {
@@ -41,8 +41,7 @@ class StockReturn extends Model
 
         $lastInt = (!empty($data))?intval(substr($data->return_no,5)):0;
         $ref = 1;
-//        $ref .= $dtaB->code;
-        $ref .= isset($dtaB->code)?$dtaB->code:12;
+        $ref .= $dtaB->code;
         $ref .= date('y');
         $ref .= substr("0000", 0, -strlen($lastInt+1));
         $ref .= $lastInt+1;

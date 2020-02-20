@@ -36,6 +36,13 @@
                             <span class="hide-menu">Stock In (Receive)</span>
                         </a>
                     </li>
+
+                    <li class="sidebar-item">
+                        <a href="{{ route('stock_return.index') }}" class="sidebar-link">
+                            <i class="mdi mdi-cart"></i>
+                            <span class="hide-menu">Return to Supplier</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="sidebar-item">

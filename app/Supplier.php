@@ -12,4 +12,8 @@ class Supplier extends Model
     {
         return $this->hasMany('App\Purchases','supplier','id');
     }
+    public function relStockReturn()
+    {
+        return $this->hasMany('App\StockReturn');
+    }
 }

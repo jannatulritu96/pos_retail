@@ -15,10 +15,12 @@ class CreateReturnQuantitiesTable extends Migration
     {
         Schema::create('return_quantities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('stock_return_id');
+            $table->foreign('stock_return_id')->references('id')->on('stock_return');
             $table->unsignedBigInteger('stock_item_id');
             $table->foreign('stock_item_id')->references('id')->on('stock_items');
             $table->string('product');
-            $table->string('returning_qty');
+            $table->string('returning_qty')->nullable();
             $table->timestamps();
         });
     }

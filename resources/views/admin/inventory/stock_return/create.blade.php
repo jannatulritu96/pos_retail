@@ -31,8 +31,9 @@
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         <label for="outlet">Outlet</label>
-                                        <input id="outlet" type="text" class="form-control" name="outlet"
+                                        <input id="outlet" type="text" class="form-control"
                                                value="{{ $stock->relOutlet->name }}" readonly>
+                                        <input type="hidden" name="outlet" value="{{ $stock->outlet }}">
                                     </div>
 
                                     <div class="form-group col-md-3">
@@ -97,7 +98,7 @@
                                 <textarea type="text" rows="3"
                                           class="form-control  @error('return_causes') is-invalid @enderror"
                                           name="return_causes" id="return_causes" placeholder="Return Causes"
-                                          value="{{ old('return_causes') }}" style="width: 98%;" required></textarea>
+                                          value="{{ old('return_causes') }}" style="width: 98%;" required>{{ $stock->return_causes }}</textarea>
                                 @error('return_causes')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -110,18 +111,19 @@
                                     <div class="row" id="productRow0">
                                         <div class="form-group col-md-3">
                                             <label for="product">Product</label>
-                                            <input id="product" type="text" class="form-control" name="product[0][product]"
+                                            <input id="product" type="text" class="form-control"
                                                    value="{{ $item->relProduct->name }}" readonly>
+                                            <input type="hidden" value="{{ $item->relProduct->id }}" name="product_id[]">
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="unit">Unit</label>
-                                            <input id="unit" type="text" class="form-control" name="unit"
+                                            <input id="unit" type="text" class="form-control" name="unit[]"
                                                    value="{{ $item->relProduct->relUnit->unit}}" readonly>
                                         </div>
                                         {{--                                    {{ dd($stock) }}--}}
                                         <div class="form-group  col-md-1">
                                             <label for="unit_price">Unit Price (Tk)</label>
-                                            <input type="number" class="form-control"
+                                            <input type="number" class="form-control" name="unit_price[]"
                                                    value="{{ $item->unit_price }}" id="unit_price0" readonly>
                                             @error('unit_price')
                                             <span class="invalid-feedback" role="alert">
@@ -131,7 +133,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="rcv_qty">Receive Qty</label>
-                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}"
+                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}" name="rcv_qty[]"
                                                    id="rcv_qty0" readonly>
                                         </div>
                                         <div class="form-group col-md-2">
@@ -140,7 +142,7 @@
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="rem_qty">Rem. Qty</label>
-                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}"
+                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}" name="rem_qty[]"
                                                    id="rem_qty{{$key}}" readonly>
                                         </div>
                                         <div class="form-group col-md-2">

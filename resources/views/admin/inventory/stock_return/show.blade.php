@@ -11,7 +11,7 @@
                     <ol class="breadcrumb mb-0 justify-content-end p-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Stock In</li>
+                        <li class="breadcrumb-item active" aria-current="page">Stock return show</li>
                     </ol>
                 </nav>
             </div>
@@ -25,7 +25,7 @@
                         <div class="col-md-12">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="card-title">Stock In (Receive) Details</h4>
+                                    <h4 class="card-title">Return to Supplier Details</h4>
                                 </div>
                                 <div class="col-md-6">
 
@@ -44,55 +44,47 @@
                                             <tr>
                                                 <th style="width:120px;">Outlet</th>
                                                 <th style="width:10px;">:</th>
-                                                <td>{{ $data->relOutlet->name}}</td>
+                                                <td>{{ $data->relStockReturn->relStockIn->relOutlet->name}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Supplier</th>
                                                 <th>:</th>
-                                                <td>{{ $data->relSupplier->name }}</td>
+                                                <td>{{ $data->relStockReturn->relStockIn->relSupplier->name }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Receive No.</th>
                                                 <th>:</th>
-                                                <td>{{ $data->receive_no }}</td>
+                                                <td>{{ $data->relStockReturn->relStockIn->receive_no }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Receive Date</th>
                                                 <th>:</th>
-                                                <td>{{ $data->receive_date }}</td>
+                                                <td>{{ $data->relStockReturn->relStockIn->receive_date }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Challan No.</th>
                                                 <th>:</th>
-                                                <td>{{ $data->challan_no }}</td>
+                                                <td>{{ $data->relStockReturn->relStockIn->challan_no }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Challan Date</th>
                                                 <th>:</th>
-                                                <td>{{ $data->challan_date }}</td>
+                                                <td>{{ $data->relStockReturn->relStockIn->challan_date }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Challan Document</th>
+                                                <th>Return No.</th>
                                                 <th>:</th>
-                                                <td>&nbsp;</td>
+                                                <td>{{ $data->relStockReturn->return_no }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Note</th>
+                                                <th>Return Date</th>
                                                 <th>:</th>
-                                                <td></td>
+                                                <td>{{ $data->relStockReturn->return_date }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Status</th>
+                                                <th>Return Causes</th>
                                                 <th>:</th>
-                                                <td>
-                                                    @if($data->status == 1)
-                                                        <span style="font-size: 16px;"
-                                                              class="badge badge-pill badge-success">Active</span>
-                                                    @else($data->status == 0)
-                                                        <span style="font-size: 16px;"
-                                                              class="badge badge-pill badge-danger">Inactive</span>
-                                                    @endif
-                                                </td>
+                                                <td>{{ $data->relStockReturn->return_causes }}</td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -108,54 +100,29 @@
                                                 <th>Product</th>
                                                 <th>Code</th>
                                                 <th>Unit</th>
-                                                <th class="text-right" align="right">Quantity</th>
+                                                <th class="text-right" align="right">Return Qty	</th>
                                                 <th class="text-right" align="right">Unit Price (Tk)</th>
                                                 <th class="text-right" align="right">Total Price (Tk)</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($data->relStockItem as $key => $item)
                                                 <tr>
-                                                    <td>{{ $key++ }}</td>
-                                                    <td>{{ $item->relProduct->name }}</td>
-                                                    <td>{{ $item->relProduct->code }}</td>
-                                                    <td>{{ $item->relProduct->relUnit->unit }}</td>
-                                                    <td class="text-right" align="right">{{ $item->rcv_qty }}</td>
-                                                    <td class="text-right" align="right">{{ $item->unit_price }}</td>
-                                                    <td class="text-right" align="right">{{ $item->total_price }}</td>
+                                                    <td>{{ $data->id }}</td>
+                                                    <td>{{ $data->relProduct->name }}</td>
+                                                    <td>{{ $data->relProduct->code }}</td>
+                                                    <td>{{ $data->relProduct->relUnit->unit }}</td>
+                                                    <td class="text-right" align="right">{{ $data->returning_qty }}</td>
+                                                    <td class="text-right" align="right">{{ $data->relStockItem->unit_price }}</td>
+                                                    <td class="text-right" align="right">{{ $data->relStockItem->total_price }}</td>
                                                 </tr>
-                                            @endforeach
                                             </tbody>
 
                                             <tfoot>
                                             <tr>
                                                 <th class="text-right" align="right" colspan="4">Total Quantity :</th>
-                                                <th class="text-right" align="right">{{ $data->total_qty }}</th>
+                                                <th class="text-right" align="right">{{ $data->relStockReturn->relStockIn->total_qty }}</th>
                                                 <th class="text-right" align="right">Total Amount (Tk) :</th>
-                                                <th class="text-right" align="right">{{ $data->total_amount }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-right" align="right" colspan="6">Tax(15.00%) (Tk) :</th>
-                                                <th class="text-right" align="right">{{ $data->tax }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-right" align="right" colspan="6">Discount Amount (Tk)
-                                                    :
-                                                </th>
-                                                <th class="text-right" align="right">{{ $data->discount_amount }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-right" align="right" colspan="6">Payable Amount (Tk) :
-                                                </th>
-                                                <th class="text-right" align="right">{{ $data->payable_amount }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-right" align="right" colspan="6">Paid Amount (Tk) :</th>
-                                                <th class="text-right" align="right">{{ $data->paid_amount }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th class="text-right" align="right" colspan="6">Due Amount (Tk) :</th>
-                                                <th class="text-right" align="right">{{ $data->due_amount }}</th>
+                                                <th class="text-right" align="right">{{ $data->relStockReturn->relStockIn->total_amount }}</th>
                                             </tr>
                                             </tfoot>
                                         </table>
