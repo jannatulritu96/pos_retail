@@ -32,6 +32,13 @@ class ExpenseController extends Controller
             $render['outlet'] = $request->outlet;
         }
 
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->where('expense_no', '=', $request->search)
+                    ->orwhere('expense_date', '=', $request->search)
+                    ->orwhere('amount', '=', $request->search);
+            });
+        }
 
         if (isset($request->status)) {
             $sql->where('status', $request->status);
@@ -42,7 +49,7 @@ class ExpenseController extends Controller
 
         $status = (isset($request->status)) ? $request->status : '';
 
-        return view('admin.expense.expense.index',compact('data','status'));
+        return view('admin.expense.expense.index',compact('data','status','outlets','exp_cats'));
     }
 
     /**

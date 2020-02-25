@@ -43,8 +43,15 @@
                             <span class="hide-menu">Return to Supplier</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                    <a href="{{ route('supplier_payment.index') }}" class="sidebar-link">
+                        <i class="mdi mdi-cart"></i>
+                        <span class="hide-menu">Supplier Payment</span>
+                    </a>
+                    </li>
                 </ul>
             </li>
+
             <li class="sidebar-item">
                 <a class="sidebar-link has-arrow waves-effect waves-dark" href="#" aria-expanded="false">
                     <i class="fa fa-book"></i>

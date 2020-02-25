@@ -27,7 +27,10 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="card-title">Return to Supplier List</h4>
+                                <h4 class="card-title">Supplier Due Payment List</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ route('supplier_payment.create') }}" class="btn btn-primary" style="float: right;margin-bottom: 17px;">Add New Supplier Due Payment</a>
                             </div>
                         </div>
                     </div>
@@ -41,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-6 mb-2">
-                                    <form method="get" class="form-horizontal" action="{{route('stock_in.index')}}" >
+                                    <form method="get" class="form-horizontal" action="{{route('supplier_payment.index')}}" >
 
                                         <div class="dataTables_filter">
                                             <button type="submit" class="btn btn-primary" style="float: right;margin-left: 5px;padding: 2.1px 12px;">Search</button>
@@ -49,7 +52,7 @@
 
                                         <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
                                             <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"
-                                                   value="{{Request::get('stock_return')}}" onchange="search_post()">
+                                                   value="{{Request::get('supplier_payment')}}" onchange="search_post()">
                                         </div>
 
                                         <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
@@ -69,6 +72,7 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
                                     </form>
                                 </div>
                             </div>
@@ -80,30 +84,27 @@
                                                 <th>Sl</th>
                                                 <th>Outlet</th>
                                                 <th>Supplier</th>
-                                                <th class="text-center">Return No.</th>
-                                                <th class="text-center">Return Date</th>
-                                                <th class="text-center">Receive No.</th>
-                                                <th class="text-center">Receive Date</th>
+                                                <th class="text-center">Pay. Method</th>
                                                 <th class="text-center">Challan No.</th>
                                                 <th class="text-center">Challan Date</th>
-                                                <th class="text-center">Return Qty</th>
+                                                <th class="text-center">Payment Date</th>
+                                                <th class="text-center">Due Amount (Tk)</th>
+                                                <th class="text-center">Paid Amount (Tk)</th>
                                                 <th class="text-right">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                       @foreach($data as $return)
-{{--                                           {{ dd($data) }}--}}
+                                       @foreach($data as $payDeu)
                                            <tr>
-                                               <td>{{ $return->id }}</td>
-                                               <td>{{ $return->relStockReturn->relStockIn->relOutlet->name }}</td>
-                                               <td>{{ $return->relStockReturn->relStockIn->relSupplier->name }}</td>
-                                               <td class="text-center">{{ $return->relStockReturn->return_no }}</td>
-                                               <td class="text-center">{{ $return->relStockReturn->return_date }}</td>
-                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->receive_no }}</td>
-                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->receive_date }}</td>
-                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->challan_no }}</td>
-                                               <td class="text-center">{{ $return->relStockReturn->relStockIn->challan_date }}</td>
-                                               <td class="text-center">{{ $return->returning_qty }}</td>
+                                               <td>{{ $payDeu->id }}</td>
+                                               <td>{{ $payDeu->relStockIn->relOutlet->name }}</td>
+                                               <td>{{ $payDeu->relStockIn->relSupplier->name }}</td>
+                                               <td class="text-center">{{ $payDeu->relPayment->method_name }}</td>
+                                               <td class="text-center">{{ $payDeu->relStockIn->challan_no }}</td>
+                                               <td class="text-center">{{ $payDeu->relStockIn->challan_date }}</td>
+                                               <td class="text-center">{{ $payDeu->payment_date }}</td>
+                                               <td class="text-center">{{ $payDeu->receive_due }}</td>
+                                               <td class="text-center">{{ $payDeu->paid_amount }}</td>
                                                <td class="text-right">
                                                    <div class="btn-group">
                                                        <button type="button" class="btn btn-default">Action</button>
@@ -112,13 +113,13 @@
                                                            <span class="sr-only">Toggle Dropdown</span>
                                                        </button>
                                                        <ul class="dropdown-menu pull-right" role="menu">
-                                                           <li><a class="dropdown-item" href="{{ route('stock_return.show',$return->id) }}"><i class="fa fa-eye"></i> Show row</a></li>
-                                                           <li><a class="dropdown-item" href="{{ route('stock_return.edit',$return->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
+                                                           <li><a class="dropdown-item" href="{{ route('supplier_payment.show',$payDeu->id) }}"><i class="fa fa-eye"></i> Show row</a></li>
+                                                           <li><a class="dropdown-item" href="{{ route('supplier_payment.edit',$payDeu->id) }}"><i class="fa fa-edit"></i> Edit</a></li>
                                                            <li>
                                                                <div role="separator" class="dropdown-divider"></div>
                                                            </li>
                                                            <li>
-                                                               <a type="button"  onclick="deleteconfirm('{{ $return->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
+                                                               <a type="button"  onclick="deleteconfirm('{{ $payDeu->id }}')" style="margin-left: 20px;color: rebeccapurple;"><i class="fa fa-trash"></i>Delete</a>
                                                            </li>
                                                        </ul>
                                                    </div>

@@ -21,7 +21,7 @@
     </div>
     <div class="page-content container-fluid">
         <div class="row justify-content-center">
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Category create form</h4>

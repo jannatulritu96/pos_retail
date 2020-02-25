@@ -21,13 +21,31 @@ class StockInController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $sql = StockIn::with(['relOutlet','relProduct','relSupplier'])->select('*');
         $products = Product::where('status','1')->get();
         $suppliers = Supplier::where('status','1')->get();
         $outlets = Outlet::where('status','1')->get();
         $render = [];
+
+        if (isset($request->outlet)) {
+            $sql->where('outlet', 'like', '%'.$request->outlet.'%');
+            $render['outlet'] = $request->outlet;
+        }
+        if (isset($request->supplier)) {
+            $sql->where('supplier', 'like', '%'.$request->supplier.'%');
+            $render['supplier'] = $request->supplier;
+        }
+
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->where('receive_no', '=', $request->search)
+                    ->orwhere('challan_no', '=', $request->search)
+                    ->orwhere('receive_date', '=', $request->search)
+                    ->orwhere('challan_date', '=', $request->search);
+            });
+        }
 
         $data = $sql->paginate(30);
         $data->appends($render);

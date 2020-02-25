@@ -56,10 +56,12 @@ Route::group(['prefix' => 'expenses'], function (){
     Route::get('/search-report', 'Expense\ExpenseController@searchReport')->name('expense.search-report');
 });
 Route::group(['prefix' => 'inventory'], function (){
-    //Purchase  route
+    //Purchase route
     Route::resource('purchases', 'Inventory\PurchasesController');
     Route::post('/purchases/change-activity/{id}', 'Inventory\PurchasesController@changeActivity')->name('purchases.change-activity');
-    //stock_in  route
+    //Purchase Receive route
+    Route::get('purchases_receive','Inventory\PurchaseReceiveController@index')->name('purchases_receive.index');
+    //stock_in route
     Route::resource('stock_in', 'Inventory\StockInController');
     Route::post('/stock_in/change-activity/{id}', 'Inventory\StockInController@changeActivity')->name('stock-in.change-activity');
     //stock_return  route
@@ -70,4 +72,8 @@ Route::group(['prefix' => 'inventory'], function (){
     Route::get('stock_return/edit/{id}','Inventory\StockReturnController@edit')->name('stock_return.edit');
     Route::POST('stock_return/update/{id}','Inventory\StockReturnController@update')->name('stock_return.update');
     Route::POST('stock_return/destroy/{id}','Inventory\StockReturnController@destroy')->name('stock_return.destroy');
+    //Supplier Payment route
+    Route::resource('supplier_payment', 'Inventory\SupplierPaymentController');
+    Route::get('/supplier_payment/change-duePayment/{id}', 'Inventory\SupplierPaymentController@duePayment')->name('supplier_payment.duePayment');
+    Route::post('/supplier_payment/change-activity/{id}', 'Inventory\SupplierPaymentController@changeActivity')->name('supplier_payment.change-activity');
 });

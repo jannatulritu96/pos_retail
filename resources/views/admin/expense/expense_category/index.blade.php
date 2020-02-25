@@ -43,6 +43,9 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <form method="get" class="form-horizontal" action="{{route('expense_category.index')}}" >
+                                        <div class="dataTables_filter">
+                                            <button type="submit" class="btn btn-primary" style="float: right;margin-left: 5px;padding: 2.1px 12px;">Search</button>
+                                        </div>
                                         <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;">
                                             <select class="form-control form-control-sm" name="status" onchange="search_post()">
                                                 <option value="">Select Status</option>
@@ -174,8 +177,5 @@
             })
         }
 
-        function search_post() {
-            $('#search').click()
-        }
     </script>
 @endsection

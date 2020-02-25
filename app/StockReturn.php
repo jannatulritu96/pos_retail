@@ -20,7 +20,7 @@ class StockReturn extends Model
 
     public function relSupplier()
     {
-        return $this->belongsTo('App\Supplier','supplier','id');
+        return $this->belongsTo('App\Supplier');
     }
     public function relUnit()
     {

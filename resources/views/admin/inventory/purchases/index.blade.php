@@ -199,9 +199,5 @@
                 return false;
             })
         }
-
-        function search_post() {
-            $('#search').click()
-        }
     </script>
 @endsection

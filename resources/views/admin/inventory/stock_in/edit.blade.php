@@ -54,9 +54,7 @@
                                         <select class="form-control select2" style="width: 90%;" name="supplier">
                                             <option>Select supplier</option>
                                             @foreach($suppliers as $supplier)
-                                                <option value="{{$supplier->id}}"
-                                                        @if($stockIn->supplier == $supplier->id) selected
-                                                        @endif required>{{ $supplier->name }}</option>
+                                                <option value="{{$supplier->id}}" @if($stockIn->supplier == $supplier->id) selected @endif required>{{ $supplier->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('outlet')

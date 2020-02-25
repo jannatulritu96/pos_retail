@@ -24,28 +24,30 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Return to Supplier edit Form</h4>
-                        <form method="GET" class="form-horizontal" action="{{ route('stock_return.update',$stock) }}"
+                        <form method="post" class="form-horizontal" action="{{ route('stock_return.update',$stock) }}"
                               id="form_stock" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
                             @include('.admin.layouts._messages')
                             <div class="col-md-12">
                                 <div class="row">
+{{--                                    {{ dd($stock) }}--}}
+                                    <input type="hidden" name="stock_in_id" value="{{ $stock->stock_in_id }}">
+                                    <input type="hidden" name="return_no" value="{{ $stock->return_no }}">
                                     <div class="form-group col-md-3">
-                                        <label for="outlet">Outlet</label>
-                                        <input id="outlet" type="text" class="form-control" name="outlet"
-                                               value="{{ $stock->relOutlet->name }}" readonly>
+                                        <label for="outlet">Outlet<span
+                                                style="color: red">*</span></label>
+                                        <input id="outlet" type="text" class="form-control" name="outlet" value="{{ $stock->relOutlet->name }}" readonly>
+                                        <input type="hidden" name="outlet[]" value="{{ $stock->outlet }}">
                                     </div>
 
                                     <div class="form-group col-md-3">
-                                        <label for="supplier">Supplier</label>
-                                        <input id="supplier" type="text" class="form-control" name="supplier"
-                                               value="{{ $stock->relSupplier->name }}" readonly>
+                                        <label for="supplier">Supplier<span
+                                                style="color: red">*</span></label>
+                                        <input id="receive_no" type="text" class="form-control" value="{{ $stock->relStockIn->relSupplier->name }}" readonly>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="receive_no">Receive No.</label>
-                                        <input id="receive_no" type="text" class="form-control" name="receive_no"
-                                               placeholder="Auto generated" value="{{ $stock->receive_no }}" readonly>
+                                        <input id="receive_no" type="text" class="form-control" name="receive_no" placeholder="Auto generated" value="{{ $stock->relStockIn->receive_no }}" readonly>
                                         @error('receive_no')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -55,8 +57,7 @@
 
                                     <div class="form-group col-md-3">
                                         <label for="receive_date">Receive date</label>
-                                        <input id="receive_date" type="date" class="form-control" name="receive_date"
-                                               readonly value="{{ $stock->receive_date }}" readonly>
+                                        <input id="receive_date" type="date" class="form-control" name="receive_date"  readonly value="{{ $stock->relStockIn->receive_date }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -64,8 +65,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         <label for="challan_no">Challan No.</label>
-                                        <input id="challan_no" type="text" class="form-control" name="challan_no"
-                                               placeholder="Challan No." value="{{ $stock->challan_no }}"  readonly>
+                                        <input id="challan_no" type="text" class="form-control" name="challan_no" placeholder="Challan No." value="{{ $stock->relStockIn->challan_no }}"  readonly>
                                         @error('challan_no')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -74,32 +74,23 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="challan_date">Challan date</label>
-                                        <input id="challan_date" type="date" class="form-control" name="challan_date"
-                                               value="{{ $stock->challan_date }}"  readonly>
+                                        <input id="challan_date" type="date" class="form-control" name="challan_date" value="{{ $stock->relStockIn->challan_date }}"  readonly>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="return_no">Return No.</label>
-                                        <input id="return_no" type="number"
-                                               class="form-control @error('return_no') is-invalid @enderror"
-                                               name="return_no" placeholder="Auto generated"
-                                               value="{{ old('return_no') }}" readonly>
+                                        <input id="return_no" type="number" class="form-control" name="return_no" value="{{ $stock->return_no }}" readonly>
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="return_date">Return date<span
                                                 style="color: red">*</span></label>
-                                        <input id="return_date" type="date"
-                                               class="form-control @error('return_date') is-invalid @enderror"
-                                               name="return_date" value="{{ date('Y-m-d') }}" readonly>
+                                        <input id="return_date" type="date" class="form-control"  name="return_date" value="{{ $stock->return_date }}" readonly>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="return_causes">Return Causes<span
                                         style="color: red">*</span></label>
-                                <textarea type="text" rows="3"
-                                          class="form-control  @error('return_causes') is-invalid @enderror"
-                                          name="return_causes" id="return_causes" placeholder="Return Causes"
-                                          value="{{ old('return_causes') }}" style="width: 98%;" required></textarea>
+                                <textarea type="text" rows="3" class="form-control" name="return_causes[]" id="return_causes" placeholder="Return Causes">{{ $stock->return_causes }}</textarea>
                                 @error('return_causes')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -112,19 +103,15 @@
                                     <div class="row" id="productRow0">
                                         <div class="form-group col-md-3">
                                             <label for="product">Product</label>
-                                            <input id="product" type="text" class="form-control" name="product"
-                                                   value="{{ $item->relProduct->name }}" readonly>
+                                            <input id="product" type="text" class="form-control" name="product" value="{{ $item->relProduct->name }}" readonly>
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="unit">Unit</label>
-                                            <input id="unit" type="text" class="form-control" name="unit"
-                                                   value="{{ $item->relProduct->relUnit->unit}}" readonly>
+                                            <input id="unit" type="text" class="form-control" name="unit" value="{{ $item->relProduct->relUnit->unit}}" readonly>
                                         </div>
-                                        {{--                                    {{ dd($stock) }}--}}
                                         <div class="form-group  col-md-1">
                                             <label for="unit_price">Unit Price (Tk)</label>
-                                            <input type="number" class="form-control"
-                                                   value="{{ $item->unit_price }}" id="unit_price0" readonly>
+                                            <input type="number" class="form-control" value="{{ $item->unit_price }}" id="unit_price0" readonly>
                                             @error('unit_price')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -133,8 +120,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="rcv_qty">Receive Qty</label>
-                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}"
-                                                   id="rcv_qty0" readonly>
+                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}" id="rcv_qty0" readonly>
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="returning_qty">Returned Qty</label>
@@ -142,8 +128,7 @@
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="rem_qty">Rem. Qty</label>
-                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}"
-                                                   id="rem_qty{{$key}}" readonly>
+                                            <input type="number" class="form-control" value="{{ $item->rcv_qty }}" id="rem_qty{{$key}}" readonly>
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="returning_qty">Returning Qty</label>

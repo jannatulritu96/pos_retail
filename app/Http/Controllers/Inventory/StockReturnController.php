@@ -25,26 +25,23 @@ class StockReturnController extends Controller
         $outlets = Outlet::where('status','1')->get();
         $render = [];
 
-//        if(isset($request->search)){
-//                $sql->ReturnQuantity::with(['relStockReturn' => function($q){
-//                        $q->with(['relStockIn' => function($q){
-//                            $q->with(['relOutlet','relSupplier']);
-//                        }]);
-//                     }])->where(function ($q) use($request){
-//                    $q->where('return_no', '=', $request->search)
-//                        ->orwhere('receive_no', '=', $request->search)
-//                        ->orwhere('challan_no', '=', $request->search);
-//                });
-//        }
+        if (isset($request->outlet)) {
+            $sql->where('outlet', 'like', '%'.$request->outlet.'%');
+            $render['outlet'] = $request->outlet;
+        }
+        if (isset($request->supplier)) {
+            $sql->where('supplier', 'like', '%'.$request->supplier.'%');
+            $render['supplier'] = $request->supplier;
+        }
 
-//        if (isset($request->outlet)) {
-//            $sql->where('outlet', 'like', '%'.$request->outlet.'%');
-//            $render['outlet'] = $request->outlet;
-//        }
-//        if (isset($request->supplier)) {
-//            $sql->where('supplier', 'like', '%'.$request->supplier.'%');
-//            $render['supplier'] = $request->supplier;
-//        }
+        if(isset($request->search)){
+            $sql->where(function ($q) use($request){
+                $q->where('receive_no', '=', $request->search)
+                    ->orwhere('challan_no', '=', $request->search)
+                    ->orwhere('receive_date', '=', $request->search)
+                    ->orwhere('challan_date', '=', $request->search);
+            });
+        }
 
         $data = $sql->paginate(30);
         $data->appends($render);
@@ -110,33 +107,45 @@ class StockReturnController extends Controller
 
     public function edit($id)
     {
-
-        $stock = StockIn::with(['relOutlet','relSupplier'])->findOrFail($id);
+        $stock = StockReturn::with(['relOutlet','relStockIn' => function($q){
+                            $q->with('relSupplier');
+                        }])->findOrFail($id);
 
         $stockItem = StockItem::select('stock_items.*', \DB::raw('IFNULL(A.returnedQty, 0) AS returnedQty'))->with(['relProduct','relUnit'])
             ->leftJoin(\DB::raw("(SELECT stock_item_id, SUM(returning_qty) AS returnedQty FROM return_quantities GROUP BY stock_item_id) AS A"), 'stock_items.id', '=', 'A.stock_item_id')
             ->where('stock_in_id', $id)
             ->get();
 
-        return view('admin.inventory.stock_return.create',compact('stock', 'stockItem'));
+//        $stockItem = ReturnQuantity::with(['relStockReturn','relStockItem']);
+        return view('admin.inventory.stock_return.edit',compact('stock', 'stockItem','outlets','suppliers'));
     }
 
     public function update(Request $request, $id){
-        dd($request->all());
-        $stock = StockItem::find($id);
         $stockReturn = StockReturn::where(['id'=> $id])->Update([
+            'stock_in_id' => $request->stock_in_id,
+            'outlet' => $request->outlet,
+            'return_no' => $request->return_no,
+            'return_date' => $request->return_date,
             'return_causes' => $request->return_causes,
         ]);
 
-        foreach ($request->id as $key => $return_quantities_id) {
-            if (isset($return_quantities_id)) {
-                ReturnQuantity::where(['id' => $return_quantities_id])->Update([
-                    'stock_item_id' => $stock->id,
-                    'stock_return_id' => $stockReturn->id,
-                    'returning_qty' => $request->returning_qty[$key],
-                ]);
-            }
+//        foreach ($request->id as $key => $return_quantities_id) {
+//            if (isset($return_quantities_id)) {
+//                ReturnQuantity::where(['id' => $return_quantities_id])->Update([
+//                    'stock_item_id' => $request->stock_item_id,
+//                    'stock_return_id' => $request->stock_return_id[$key],
+//                    'product' => $request->product[$key],
+//                    'returning_qty' => $request->returning_qty[$key],
+//                ]);
+//            }
+//        }
+
+        if ($stockReturn) {
+            session()->flash('success','Stock return successfully');
+        } else {
+            session()->flash('error','Something was wrong!  ');
         }
+        return redirect()->route('stock_return.index');
     }
 
     public function destroy($id)
@@ -158,3 +167,4 @@ class StockReturnController extends Controller
         ]);
     }
 }
+

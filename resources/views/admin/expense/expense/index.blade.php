@@ -43,6 +43,10 @@
                                 </div>
                                 <div class="col-sm-12 col-md-6">
                                     <form method="get" class="form-horizontal" action="{{route('expense.index')}}" >
+                                        <div class="dataTables_filter">
+                                            <button type="submit" class="btn btn-primary" style="float: right;margin-left: 5px;padding: 2.1px 12px;">Search</button>
+                                        </div>
+
                                         <div id="default_order_filter" class="dataTables_filter mb-2" style="float: right;">
                                             <select class="form-control form-control-sm" name="status" onchange="search_post()">
                                                 <option value="">Select Status</option>
@@ -54,6 +58,25 @@
                                             <input type="text" class="form-control form-control-sm" name="search" placeholder="Search"
                                                    value="{{Request::get('expense')}}" onchange="search_post()">
                                         </div>
+
+                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
+                                            <select class="form-control form-control-sm" name="exp_cat" id="exp_cat">
+                                                <option value="">Select categories</option>
+                                                @foreach($exp_cats as $exp_cat)
+                                                    <option value="{{ $exp_cat->id }}">{{ $exp_cat->cat_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div id="default_order_filter" class="dataTables_filter" style="float: right;margin-right: 5px">
+                                            <select class="form-control form-control-sm" name="outlet" id="outlet">
+                                                <option value="">Select outlet</option>
+                                                @foreach($outlets as $outlet)
+                                                    <option value="{{ $outlet->id }}">{{ $outlet->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
                                         <div class="col-sm-2" style="margin-left: 1144px; margin-top: -38px;display: none">
                                             <button id="search" type="submit" class="btn btn-primary">Search</button>
                                         </div>
@@ -180,9 +203,6 @@
             }, function (dismiss) {
                 return false;
             })
-        }
-        function search_post() {
-            $('#search').click()
         }
     </script>
 @endsection
