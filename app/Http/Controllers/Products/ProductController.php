@@ -147,6 +147,7 @@ class ProductController extends Controller
         $product->purchases = $request->purchases;
         $product->sell = $request->sell;
         $product->details = $request->details;
+        
         if($request->hasFile('image'))
         {
             $photo= $request->file('image');

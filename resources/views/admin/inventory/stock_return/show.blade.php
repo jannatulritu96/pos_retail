@@ -92,8 +92,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <table id="default_order" class="table table-striped border display"
-                                               style="width:100%">
+                                        <table id="default_order" class="table table-striped border display" style="width:100%">
                                             <thead>
                                             <tr>
                                                 <th>SL</th>

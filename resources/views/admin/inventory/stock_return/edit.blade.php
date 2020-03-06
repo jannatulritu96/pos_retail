@@ -30,7 +30,6 @@
                             @include('.admin.layouts._messages')
                             <div class="col-md-12">
                                 <div class="row">
-{{--                                    {{ dd($stock) }}--}}
                                     <input type="hidden" name="stock_in_id" value="{{ $stock->stock_in_id }}">
                                     <input type="hidden" name="return_no" value="{{ $stock->return_no }}">
                                     <div class="form-group col-md-3">

@@ -92,7 +92,6 @@
                                         </thead>
                                         <tbody>
                                        @foreach($data as $return)
-{{--                                           {{ dd($data) }}--}}
                                            <tr>
                                                <td>{{ $return->id }}</td>
                                                <td>{{ $return->relStockReturn->relStockIn->relOutlet->name }}</td>
